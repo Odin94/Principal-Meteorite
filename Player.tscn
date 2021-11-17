@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/player_spriteframe.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 26.0
+height = 8.0
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+Bullet = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )
+
+[node name="ShootingCooldown" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2, 5 )
+scale = Vector2( 2.0625, 2.1 )
+frames = ExtResource( 1 )
+animation = "jumping"
+playing = true
