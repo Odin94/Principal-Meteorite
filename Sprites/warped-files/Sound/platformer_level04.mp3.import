@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/platformer_level04.mp3-cacd2c2d88cafd547fdd9c6457f62971.mp3str"
+
+[deps]
+
+source_file="res://Sprites/warped-files/Sound/platformer_level04.mp3"
+dest_files=[ "res://.import/platformer_level04.mp3-cacd2c2d88cafd547fdd9c6457f62971.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

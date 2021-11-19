@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/platformer_level04_loop.ogg-f7474131316f42819b68f3f73d024899.oggstr"
+
+[deps]
+
+source_file="res://Sprites/warped-files/Demo/assets/sound/platformer_level04_loop.ogg"
+dest_files=[ "res://.import/platformer_level04_loop.ogg-f7474131316f42819b68f3f73d024899.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
