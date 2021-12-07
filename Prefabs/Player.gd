@@ -15,18 +15,18 @@ func _physics_process(delta):
     if Input.is_action_pressed("right"):
         velocity.x = speed
         direction = 1
-        $Sprite.play("running")
-        $Sprite.flip_h = false
+        $AnimatedSprite.play("running")
+        $AnimatedSprite.flip_h = false
     elif Input.is_action_pressed("left"):
         velocity.x = -speed
         direction = -1
-        $Sprite.play("running")
-        $Sprite.flip_h = true
+        $AnimatedSprite.play("running")
+        $AnimatedSprite.flip_h = true
     else:
-        $Sprite.play("idle")
+        $AnimatedSprite.play("idle")
         
     if not is_on_floor():
-        $Sprite.play("jumping")
+        $AnimatedSprite.play("jumping")
         if not Input.is_action_pressed("jump") and velocity.y < 0:
             velocity.y = 0
 
@@ -49,6 +49,10 @@ func shoot():
         var bullet = Bullet.instance()
         owner.add_child(bullet)
         bullet.transform = global_transform
+        
+        var bullet_offset = $AnimatedSprite.frames.get_frame("idle", 0).get_width() * 0.9
+        bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
+        
         bullet.set_direction(Vector2(direction, 0))
         
         shooting_cooldown.start()  # Timer node has Wait Time & One Shot to run only once for a certain time

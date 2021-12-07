@@ -22,10 +22,10 @@ shape = SubResource( 1 )
 wait_time = 0.15
 one_shot = true
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "running"
-frame = 3
+frame = 4
 playing = true
