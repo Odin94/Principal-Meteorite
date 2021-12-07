@@ -6,8 +6,8 @@ onready var shooting_cooldown = $ShootingCooldown
 
 var velocity = Vector2(0, 0)
 const speed = 360
-const gravity = 90
-const jump_force = -1400
+const gravity = 45
+const jump_force = -900
 
 var direction = 1
 
