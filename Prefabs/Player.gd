@@ -27,6 +27,8 @@ func _physics_process(delta):
         
     if not is_on_floor():
         $Sprite.play("jumping")
+        if not Input.is_action_pressed("jump") and velocity.y < 0:
+            velocity.y = 0
 
     velocity.y += gravity
 
