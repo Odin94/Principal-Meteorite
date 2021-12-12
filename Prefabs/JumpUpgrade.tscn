@@ -16,6 +16,7 @@ font_data = ExtResource( 4 )
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 texture = ExtResource( 1 )

@@ -16,6 +16,8 @@ var air_jump_count = air_jump_count_max
 var touched_ground_recently = true
 var jump_was_pressed = false
 
+var bullet_lifespan = 0.2
+
 func _physics_process(_delta):
     if Input.is_action_pressed("right"):
         velocity.x = speed
@@ -70,6 +72,7 @@ func shoot():
         bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
         
         bullet.set_direction(Vector2(direction, 0))
+        bullet.limit_lifespan(bullet_lifespan)        
         
         shooting_cooldown.start()  # Timer node has Wait Time & One Shot to run only once for a certain time
 
