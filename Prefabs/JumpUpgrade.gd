@@ -5,7 +5,7 @@ onready var pause_timer = $PauseTimer
 func _on_Area2D_body_entered(body: Node2D):
     print(body.name)
     if body.name == "Player":
-        body.jump_count_max += 1
+        body.air_jump_count_max += 1
         print("Found jump upgrade!")
         pause_timer.start()
         pause_timer.pause_mode

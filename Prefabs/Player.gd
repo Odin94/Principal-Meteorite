@@ -11,8 +11,8 @@ const jump_force = -900
 
 var direction = 1
 
-var jump_count_max = 1
-var jump_count = jump_count_max
+var air_jump_count_max = 0
+var air_jump_count = air_jump_count_max
 
 func _physics_process(_delta):
     if Input.is_action_pressed("right"):
@@ -36,11 +36,12 @@ func _physics_process(_delta):
     velocity.y += gravity
     
     if is_on_floor():
-        jump_count = jump_count_max
+        air_jump_count = air_jump_count_max
 
-    if Input.is_action_just_pressed("jump") and jump_count > 0:
+    if Input.is_action_just_pressed("jump") and (is_on_floor() or air_jump_count > 0):
         velocity.y = jump_force
-        jump_count -= 1
+        if !is_on_floor():
+            air_jump_count -= 1
 
     # returns lowered y-velocity when colliding with floor, applies moving platform speed etc
     # Needs UP to know which way is up and which way is the floor (for eg. is_on_floor())
