@@ -10,6 +10,8 @@ export var direction = -1
 func _ready():
     if direction == 1:
         $AnimatedSprite.flip_h = true
+    $FloorChecker.position.x = $CollisionShape2D.shape.get_extents().x * direction
+    var x: CapsuleShape2D
 
 func _physics_process(_delta):
     if is_on_wall():
@@ -24,3 +26,4 @@ func _physics_process(_delta):
 func change_direction():
     direction *= -1
     $AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+    $FloorChecker.position.x = $CollisionShape2D.shape.get_extents().x * direction
