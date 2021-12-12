@@ -8,6 +8,7 @@ func _on_Area2D_body_entered(body: Node2D):
         print("Found jump upgrade!")
         $PauseTimer.start()
         $PickUpSound.play()
+        $PickUpText.visible = true
         get_tree().paused = true
 
 func _on_PauseTimer_timeout():
