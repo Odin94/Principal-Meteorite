@@ -86,3 +86,4 @@ func jump():
     if !touched_ground_recently:
         air_jump_count -= 1
     touched_ground_recently = false
+    $JumpSound.play()
