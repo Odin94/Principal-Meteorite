@@ -16,3 +16,8 @@ func _physics_process(_delta):
 
 func set_direction(new_direction: Vector2):
     self.direction = new_direction
+
+
+func _on_Bullet_body_entered(body):
+    if body is TileMap:
+        queue_free()

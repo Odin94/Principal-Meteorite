@@ -61,6 +61,7 @@ func _physics_process(_delta):
 
 func shoot():
     if shooting_cooldown.is_stopped():
+        $ShotSound.play()
         var bullet = Bullet.instance()
         owner.add_child(bullet)
         bullet.transform = global_transform

@@ -6,3 +6,4 @@
 * Font: Open Sans
 * Sounds:
     * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
+    * Shooting made with [sfxr](https://sfxr.me)
