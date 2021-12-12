@@ -35,7 +35,7 @@ script = ExtResource( 9 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -43,5 +43,6 @@ scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 2 )
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
+enabled = true
 cast_to = Vector2( 0, 20 )
 collision_mask = 16
