@@ -26,7 +26,7 @@ position = Vector2( -0.75, -1.75 )
 scale = Vector2( 1.16667, 1.16667 )
 frames = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite"]
-position = Vector2( 0.642857, 1.5 )
-scale = Vector2( 0.857143, 0.857143 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.96695e-06, 5.00679e-06 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )

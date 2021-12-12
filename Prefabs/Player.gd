@@ -4,17 +4,17 @@ export (PackedScene) var Bullet
 
 onready var shooting_cooldown = $ShootingCooldown
 
-var velocity = Vector2(0, 0)
+var velocity := Vector2(0, 0)
 const speed = 360
 const gravity = 45
 const jump_force = -900
 
 var direction = 1
 
-var jump_count_max = 2  # TODO: Make double jump an upgrade
+var jump_count_max = 1
 var jump_count = jump_count_max
 
-func _physics_process(delta):
+func _physics_process(_delta):
     if Input.is_action_pressed("right"):
         velocity.x = speed
         direction = 1
