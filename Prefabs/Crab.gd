@@ -6,12 +6,14 @@ const gravity = 45
 const jump_force = -900
 
 export var direction = -1
+export var detects_cliffs = true
 
 func _ready():
     if direction == 1:
         $AnimatedSprite.flip_h = true
     $FloorChecker.position.x += $CollisionShape2D.shape.radius * direction
     $AnimatedSprite.play("walking")
+    $FloorChecker.enabled = detects_cliffs
 
 func _physics_process(_delta):
     if is_on_floor() and (is_on_wall() or not $FloorChecker.is_colliding()):
