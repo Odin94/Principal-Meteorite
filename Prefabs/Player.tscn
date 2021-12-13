@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/player_spriteframe.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Prefabs/Player.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Audio/mixkit_arrow_whoosh.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/laser_shot.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/hurt.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 29.5 )
@@ -21,16 +22,12 @@ Bullet = ExtResource( 3 )
 position = Vector2( 0, 8.5 )
 shape = SubResource( 1 )
 
-[node name="ShootingCooldown" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "running"
-frame = 4
+frame = 3
 playing = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
@@ -38,3 +35,14 @@ stream = ExtResource( 4 )
 
 [node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="ShootingCooldown" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="MinHitRecoveryTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

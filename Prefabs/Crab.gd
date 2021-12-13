@@ -29,9 +29,7 @@ func _physics_process(_delta):
 func change_direction():
     if $TurnAroundCooldown.is_stopped():
         direction *= -1
-        print("before: %s" % $FloorChecker.position.x)
         $FloorChecker.position.x += $CollisionShape2D.shape.get_extents().x * 2 * direction
-        print($FloorChecker.position.x)
         
         $AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
         $TurnAroundCooldown.start()
@@ -39,4 +37,4 @@ func change_direction():
 
 func _on_DamageArea_body_entered(body):
     if body.name == "Player":
-        body.get_hurt()
+        body.get_hurt(position.x)
