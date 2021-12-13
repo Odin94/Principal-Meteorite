@@ -44,12 +44,6 @@ func _on_DamageArea_body_entered(body: Node2D):
         body.hit_enemy()
         
         
-func _on_DamageArea_area_entered(area: Area2D):
-    if area.name == "Bullet":
-        get_hurt()
-        area.hit_enemy()
-        
-        
 func get_hurt():
     set_modulate(Color(1, 0.3, 0.3, 0.3))
     velocity.x = 0
@@ -57,6 +51,5 @@ func get_hurt():
     
 
 func _on_HitEffectTimeout_timeout():
-    print("timeout")
     set_modulate(Color(1, 1, 1, 1))
     velocity.x = speed * direction
