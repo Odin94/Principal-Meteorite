@@ -8,10 +8,11 @@ const jump_force = -900
 export var direction = -1
 export var detects_cliffs = true
 
+
 func _ready():
     if direction == 1:
         $AnimatedSprite.flip_h = true
-    $FloorChecker.position.x += $CollisionShape2D.shape.radius * direction
+    $FloorChecker.position.x += $CollisionShape2D.shape.get_extents().x * direction
     $AnimatedSprite.play("walking")
     $FloorChecker.enabled = detects_cliffs
 
@@ -26,6 +27,16 @@ func _physics_process(_delta):
 
 
 func change_direction():
-    direction *= -1
-    $FloorChecker.position.x += $CollisionShape2D.shape.radius * 2 * direction
-    $AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+    if $TurnAroundCooldown.is_stopped():
+        direction *= -1
+        print("before: %s" % $FloorChecker.position.x)
+        $FloorChecker.position.x += $CollisionShape2D.shape.get_extents().x * 2 * direction
+        print($FloorChecker.position.x)
+        
+        $AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
+        $TurnAroundCooldown.start()
+
+
+func _on_DamageArea_body_entered(body):
+    if body.name == "Player":
+        body.get_hurt()

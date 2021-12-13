@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/crab-idle/crab-idle-4.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/crab-idle/crab-idle-2.png" type="Texture" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/crab-idle/crab-idle-1.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/crab-walk/crab-walk-1.png" type="Texture" id=8]
 [ext_resource path="res://Prefabs/Crab.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 20, 23.3333 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,8 +26,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-height = 12.0
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 21, 26.3333 )
 
 [node name="Crab" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
@@ -32,17 +35,34 @@ collision_layer = 8
 collision_mask = 19
 script = ExtResource( 9 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 3 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 2 )
-
 [node name="FloorChecker" type="RayCast2D" parent="."]
+position = Vector2( 0, 14.6667 )
 enabled = true
 cast_to = Vector2( 0, 20 )
 collision_mask = 16
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+visible = false
+position = Vector2( 0.333332, 5.66667 )
+shape = SubResource( 4 )
+
+[node name="TurnAroundCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_Area2D_body_entered"]

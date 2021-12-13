@@ -31,5 +31,5 @@ drag_margin_v_enabled = true
 position = Vector2( -160, 312 )
 
 [node name="Crab" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1000, 160 )
-scale = Vector2( 2.25, 2.25 )
+position = Vector2( 912, 152 )
+scale = Vector2( 1, 1 )

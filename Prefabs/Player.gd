@@ -91,3 +91,6 @@ func jump():
         air_jump_count -= 1
     touched_ground_recently = false
     $JumpSound.play()
+    
+func get_hurt():
+    set_modulate(Color(1, 0.3, 0.3, 0.3))
