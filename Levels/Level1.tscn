@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/JumpUpgrade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Crab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/DamagingArea.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/living-tissue-platform-files/PNG/layers/background_looped.png" type="Texture" id=6]
 
 [node name="Level1" type="Node2D"]
 
@@ -42,3 +43,14 @@ scale = Vector2( 16, 3 )
 [node name="DamagingArea2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -64, 456 )
 scale = Vector2( 4, 3 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="LivingWall" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2304, 2304 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/LivingWall"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+centered = false
+region_rect = Rect2( 0, 0, 720, 1280 )
