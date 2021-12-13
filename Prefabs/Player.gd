@@ -19,12 +19,13 @@ var jump_was_pressed = false
 var bullet_lifespan = 0.2
 
 var in_hit_recovery = false
+var invincibility_time = 0.3
 
 func _physics_process(_delta):
     if $MinHitRecoveryTimer.is_stopped() and is_on_floor():
         in_hit_recovery = false
         set_modulate(Color(1, 1, 1, 1))
-    
+        
     if not in_hit_recovery:
         process_input()
 
@@ -107,16 +108,18 @@ func jump():
     $JumpSound.play()
     
     
-func get_hurt(var source_x):
-    if not in_hit_recovery:
+func get_hurt(var source_x: float, var trigger_hit_recovery: bool = true):
+    if $InvincibilityTimer.is_stopped():
         set_modulate(Color(1, 0.3, 0.3, 0.3))
-        velocity.y = jump_force * 0.5
-        
-        if position.x <= source_x:
-            velocity.x = -800
-        else:
-            velocity.x = 800
-        
-        in_hit_recovery = true
-        $MinHitRecoveryTimer.start()
         $HurtSound.play()
+        $InvincibilityTimer.start(invincibility_time)
+
+        if trigger_hit_recovery:
+            velocity.y = jump_force * 0.5
+            if position.x <= source_x:
+                velocity.x = -1200
+            else:
+                velocity.x = 1200
+            
+            in_hit_recovery = true
+            $MinHitRecoveryTimer.start()

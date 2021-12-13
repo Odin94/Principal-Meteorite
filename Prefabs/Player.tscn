@@ -27,7 +27,7 @@ position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "running"
-frame = 2
+frame = 1
 playing = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
@@ -45,4 +45,7 @@ one_shot = true
 
 [node name="MinHitRecoveryTimer" type="Timer" parent="."]
 wait_time = 0.3
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true
