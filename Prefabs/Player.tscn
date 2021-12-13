@@ -27,7 +27,7 @@ position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "running"
-frame = 1
+frame = 2
 playing = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]

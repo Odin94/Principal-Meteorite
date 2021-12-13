@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/JumpUpgrade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Crab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/DamagingArea.tscn" type="PackedScene" id=5]
 
 [node name="Level1" type="Node2D"]
 
@@ -20,7 +21,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 280, 88 )
+position = Vector2( 315, -152 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -31,5 +32,13 @@ drag_margin_v_enabled = true
 position = Vector2( -160, 312 )
 
 [node name="Crab" parent="." instance=ExtResource( 4 )]
-position = Vector2( 912, 152 )
+position = Vector2( 912, 157 )
 scale = Vector2( 1, 1 )
+
+[node name="DamagingArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 736, 296 )
+scale = Vector2( 16, 3 )
+
+[node name="DamagingArea2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -64, 456 )
+scale = Vector2( 4, 3 )

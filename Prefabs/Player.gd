@@ -37,6 +37,7 @@ func _physics_process(_delta):
 
     velocity.x = lerp(velocity.x, 0, 0.25)  # lerp = linear interpolation  # weight can be constant because _physics_process delta is constant
 
+
 func process_input():
     if Input.is_action_pressed("right"):
         velocity.x = speed
@@ -108,7 +109,7 @@ func jump():
     $JumpSound.play()
     
     
-func get_hurt(var source_x: float, var trigger_hit_recovery: bool = true):
+func get_hurt(var source_x: float = position.x, var trigger_hit_recovery: bool = true):
     if $InvincibilityTimer.is_stopped():
         set_modulate(Color(1, 0.3, 0.3, 0.3))
         $HurtSound.play()
@@ -123,3 +124,6 @@ func get_hurt(var source_x: float, var trigger_hit_recovery: bool = true):
             
             in_hit_recovery = true
             $MinHitRecoveryTimer.start()
+            
+        else:
+            $MinHitRecoveryTimer.start(invincibility_time)
