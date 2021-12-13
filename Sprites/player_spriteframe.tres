@@ -4,10 +4,6 @@
 [ext_resource path="res://Sprites/player_running.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/player_jumping.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 37 )
-
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 40 )
@@ -40,13 +36,12 @@ region = Rect2( 160, 0, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 37 )
+
 [resource]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jumping",
@@ -56,4 +51,9 @@ animations = [ {
 "loop": true,
 "name": "running",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "_idle",
+"speed": 5.0
 } ]

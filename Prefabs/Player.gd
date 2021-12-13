@@ -53,7 +53,7 @@ func process_input():
         $AnimatedSprite.play("running")
         $AnimatedSprite.flip_h = true
     else:
-        $AnimatedSprite.play("idle")
+        $AnimatedSprite.play("_idle")
         
     if not is_on_floor():
         $AnimatedSprite.play("jumping")
@@ -84,7 +84,7 @@ func shoot():
         owner.add_child(bullet)
         bullet.transform = global_transform
         
-        var bullet_offset = $AnimatedSprite.frames.get_frame("idle", 0).get_width() * 0.9
+        var bullet_offset = $AnimatedSprite.frames.get_frame("_idle", 0).get_width() * 0.9
         bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
         
         bullet.set_damage(bullet_damage)
@@ -135,4 +135,4 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
             $MinHitRecoveryTimer.start()
             
         else:
-            $MinHitRecoveryTimer.start(invincibility_time)
+            $MinHitRecoveryTimer.start(invincibility_time / 2)

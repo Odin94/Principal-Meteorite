@@ -11,7 +11,7 @@ region = Rect2( 117, 243, 9, 9 )
 animations = [ {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "default",
+"name": "_idle",
 "speed": 5.0
 } ]
 
@@ -27,6 +27,7 @@ script = ExtResource( 2 )
 position = Vector2( -0.75, -1.75 )
 scale = Vector2( 1.16667, 1.16667 )
 frames = SubResource( 3 )
+animation = "_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.96695e-06, 5.00679e-06 )

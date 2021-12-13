@@ -6,4 +6,4 @@
 * Font: Open Sans
 * Sounds:
     * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
-    * Shooting, Hurt-sounds made with [sfxr](https://sfxr.me)
+    * Shooting, hurt-sounds, death-sounds made with [sfxr](https://sfxr.me)

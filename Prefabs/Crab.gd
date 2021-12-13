@@ -19,6 +19,9 @@ func _ready():
     $FloorChecker.enabled = detects_cliffs
 
 func _physics_process(_delta):
+    if health <= 0:
+        return
+    
     if $HitEffectTimeout.is_stopped():
         if is_on_floor() and (is_on_wall() or not $FloorChecker.is_colliding()):
             change_direction()
@@ -38,6 +41,9 @@ func change_direction():
 
 
 func _on_DamageArea_body_entered(body: Node2D):
+    if health <= 0:
+        return
+
     if body.name == "Player":
         body.get_hurt(damage, position.x, true)
         
@@ -47,14 +53,22 @@ func _on_DamageArea_body_entered(body: Node2D):
         
         
 func get_hurt(damage: int):
+    $HurtSound.play()
     set_modulate(Color(1, 0.3, 0.3, 0.3))
     velocity.x = 0
     $HitEffectTimeout.start(.1)
     health -= damage
     if health <= 0:
-        queue_free()
+        die()
 
 
 func _on_HitEffectTimeout_timeout():
     set_modulate(Color(1, 1, 1, 1))
     velocity.x = speed * direction
+
+func die():
+    $DeathSound.play()
+    $AnimatedSprite.play("death")
+    set_modulate(Color(1, 1, 1, 1))
+    yield($AnimatedSprite, "animation_finished")
+    queue_free()
