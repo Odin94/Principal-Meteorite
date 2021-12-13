@@ -46,18 +46,20 @@ func _on_DamageArea_body_entered(body: Node2D):
 
     if body.name == "Player":
         body.get_hurt(damage, position.x, true)
-        
-    if body.name == "Bullet":
-        get_hurt(body.damage)
-        body.hit_enemy()
-        
-        
-func get_hurt(damage: int):
+
+
+func _on_DamageArea_area_entered(area: Area2D):
+    if area.name.validate_node_name().begins_with("Bullet"):
+        get_hurt(area.damage)
+        area.hit_enemy()
+
+
+func get_hurt(incoming_damage: int):
     $HurtSound.play()
     set_modulate(Color(1, 0.3, 0.3, 0.3))
     velocity.x = 0
     $HitEffectTimeout.start(.1)
-    health -= damage
+    health -= incoming_damage
     if health <= 0:
         die()
 

@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 
 const speed = 15
@@ -7,14 +7,16 @@ var direction := Vector2(0, 0)
 var velocity := Vector2(0, 0)
 var damage := 10
 
+var impacting = false
 
 func _physics_process(_delta):
-    if direction != Vector2(0, 0):
-        velocity = direction * speed
-        
-        global_position += velocity
-    
-    
+    if not impacting:
+        if direction != Vector2(0, 0):
+            velocity = direction * speed
+            
+            global_position += velocity
+
+
 func set_direction(new_direction: Vector2):
     self.direction = new_direction
 
@@ -30,12 +32,20 @@ func set_damage(new_damage: int):
 
 func _on_Bullet_body_entered(body: Node2D):
     if body is TileMap:
-      queue_free()
+        impact()
 
 
 func _on_Lifespan_timeout():
-    queue_free()
+    impact()
     
     
 func hit_enemy():
-    queue_free()
+    impact()
+    
+
+func impact():
+    if not impacting:
+        impacting = true
+        $AnimatedSprite.play("impact")
+        yield($AnimatedSprite, "animation_finished")
+        queue_free()
