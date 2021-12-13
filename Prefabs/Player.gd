@@ -22,7 +22,9 @@ var bullet_damage = 10
 var in_hit_recovery = false
 var invincibility_time = 0.3
 
-var health = 100
+var health = 99
+
+signal health_changed
 
 func _physics_process(_delta):
     if $MinHitRecoveryTimer.is_stopped() and is_on_floor():
@@ -117,6 +119,7 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
     if $InvincibilityTimer.is_stopped():
         health -= damage
         print(health)
+        emit_signal("health_changed", health)
         if health <= 0:
             get_tree().reload_current_scene()
 

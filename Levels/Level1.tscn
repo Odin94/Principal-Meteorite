@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,22 @@
 [ext_resource path="res://Prefabs/Crab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/DamagingArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/living-tissue-platform-files/PNG/layers/background_looped.png" type="Texture" id=6]
+[ext_resource path="res://Levels/HUD.gd" type="Script" id=7]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.160784 )
+border_color = Color( 0, 0, 0, 0.0666667 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 29
+outline_size = 2
+outline_color = Color( 0.00784314, 0, 0, 1 )
+font_data = ExtResource( 8 )
 
 [node name="Level1" type="Node2D"]
 
@@ -54,3 +70,30 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
 centered = false
 region_rect = Rect2( 0, 0, 720, 1280 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+offset = Vector2( 20, 10 )
+transform = Transform2D( 1, 0, 0, 1, 20, 10 )
+script = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="HUD"]
+margin_right = 104.0
+margin_bottom = 40.0
+input_pass_on_modal_close_click = false
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP" type="RichTextLabel" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 1, 0.8, 0.113725, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "99"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
