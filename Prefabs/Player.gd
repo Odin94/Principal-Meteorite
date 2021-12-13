@@ -5,9 +5,9 @@ export (PackedScene) var Bullet
 onready var shooting_cooldown = $ShootingCooldown
 
 var velocity := Vector2(0, 0)
-const speed = 360
+const speed = 300
 const gravity = 45
-const jump_force = -900
+const jump_force = -1200
 
 var direction = 1
 
