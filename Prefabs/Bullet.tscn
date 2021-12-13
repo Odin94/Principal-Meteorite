@@ -18,9 +18,9 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 27
+collision_mask = 51
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -34,5 +34,4 @@ shape = SubResource( 1 )
 
 [node name="Lifespan" type="Timer" parent="."]
 
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_Lifespan_timeout"]

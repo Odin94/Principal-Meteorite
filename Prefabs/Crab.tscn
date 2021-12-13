@@ -32,7 +32,7 @@ extents = Vector2( 21, 26.3333 )
 [node name="Crab" type="KinematicBody2D"]
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 8
-collision_mask = 19
+collision_mask = 16
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -44,6 +44,7 @@ shape = SubResource( 3 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
@@ -53,6 +54,8 @@ cast_to = Vector2( 0, 20 )
 collision_mask = 16
 
 [node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 visible = false
@@ -63,5 +66,11 @@ shape = SubResource( 4 )
 wait_time = 0.3
 one_shot = true
 
+[node name="HitEffectTimeout" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="area_entered" from="DamageArea" to="." method="_on_DamageArea_area_entered"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="HitEffectTimeout" to="." method="_on_HitEffectTimeout_timeout"]

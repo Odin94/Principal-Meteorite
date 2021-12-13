@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 
 
 const speed = 20
@@ -25,4 +25,7 @@ func _on_Bullet_body_entered(body):
         queue_free()
 
 func _on_Lifespan_timeout():
+    queue_free()
+    
+func hit_enemy():
     queue_free()

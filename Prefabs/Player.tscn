@@ -11,7 +11,7 @@
 extents = Vector2( 10, 29.5 )
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 31
+collision_mask = 55
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -27,7 +27,7 @@ position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "running"
-frame = 3
+frame = 4
 playing = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]

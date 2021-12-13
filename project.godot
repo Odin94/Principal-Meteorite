@@ -75,11 +75,13 @@ shoot={
 2d_render/layer_3="item"
 2d_render/layer_4="enemy"
 2d_render/layer_5="platform"
+2d_render/layer_6="enemy_damage_zone"
 2d_physics/layer_1="player"
 2d_physics/layer_2="bullet"
 2d_physics/layer_3="item"
 2d_physics/layer_4="enemy"
 2d_physics/layer_5="platform"
+2d_physics/layer_6="enemy_damage_zone"
 
 [physics]
 

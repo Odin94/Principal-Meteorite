@@ -17,10 +17,10 @@ func _ready():
     $FloorChecker.enabled = detects_cliffs
 
 func _physics_process(_delta):
-    if is_on_floor() and (is_on_wall() or not $FloorChecker.is_colliding()):
-        change_direction()
-    
-    velocity.x = speed * direction
+    if $HitEffectTimeout.is_stopped():
+        if is_on_floor() and (is_on_wall() or not $FloorChecker.is_colliding()):
+            change_direction()
+        velocity.x = speed * direction
     
     velocity.y += gravity
     velocity = move_and_slide(velocity, Vector2.UP)
@@ -35,6 +35,28 @@ func change_direction():
         $TurnAroundCooldown.start()
 
 
-func _on_DamageArea_body_entered(body):
+func _on_DamageArea_body_entered(body: Node2D):
     if body.name == "Player":
         body.get_hurt(position.x)
+        
+    if body.name == "Bullet":
+        get_hurt()
+        body.hit_enemy()
+        
+        
+func _on_DamageArea_area_entered(area: Area2D):
+    if area.name == "Bullet":
+        get_hurt()
+        area.hit_enemy()
+        
+        
+func get_hurt():
+    set_modulate(Color(1, 0.3, 0.3, 0.3))
+    velocity.x = 0
+    $HitEffectTimeout.start(.1)
+    
+
+func _on_HitEffectTimeout_timeout():
+    print("timeout")
+    set_modulate(Color(1, 1, 1, 1))
+    velocity.x = speed * direction
