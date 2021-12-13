@@ -17,9 +17,12 @@ var touched_ground_recently = true
 var jump_was_pressed = false
 
 var bullet_lifespan = 0.2
+var bullet_damage = 10
 
 var in_hit_recovery = false
 var invincibility_time = 0.3
+
+var health = 100
 
 func _physics_process(_delta):
     if $MinHitRecoveryTimer.is_stopped() and is_on_floor():
@@ -84,6 +87,7 @@ func shoot():
         var bullet_offset = $AnimatedSprite.frames.get_frame("idle", 0).get_width() * 0.9
         bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
         
+        bullet.set_damage(bullet_damage)
         bullet.set_direction(Vector2(direction, 0))
         bullet.limit_lifespan(bullet_lifespan)        
         
@@ -109,8 +113,13 @@ func jump():
     $JumpSound.play()
     
     
-func get_hurt(var source_x: float = position.x, var trigger_hit_recovery: bool = true):
+func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: bool = true):
     if $InvincibilityTimer.is_stopped():
+        health -= damage
+        print(health)
+        if health <= 0:
+            get_tree().reload_current_scene()
+
         set_modulate(Color(1, 0.3, 0.3, 0.3))
         $HurtSound.play()
         $InvincibilityTimer.start(invincibility_time)

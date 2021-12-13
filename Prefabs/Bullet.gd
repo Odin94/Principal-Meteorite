@@ -5,6 +5,7 @@ const speed = 15
 
 var direction := Vector2(0, 0)
 var velocity := Vector2(0, 0)
+var damage := 10
 
 
 func _physics_process(_delta):
@@ -21,9 +22,13 @@ func set_direction(new_direction: Vector2):
 func limit_lifespan(lifespan: float):
     $Lifespan.wait_time = lifespan
     $Lifespan.start()
+    
+
+func set_damage(new_damage: int):
+    self.damage = new_damage
 
 
-func _on_Bullet_body_entered(body):
+func _on_Bullet_body_entered(body: Node2D):
     if body is TileMap:
       queue_free()
 

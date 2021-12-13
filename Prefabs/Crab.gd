@@ -7,6 +7,8 @@ const jump_force = -900
 
 export var direction = -1
 export var detects_cliffs = true
+export var health = 30
+export var damage = 10
 
 
 func _ready():
@@ -37,18 +39,21 @@ func change_direction():
 
 func _on_DamageArea_body_entered(body: Node2D):
     if body.name == "Player":
-        body.get_hurt(position.x)
+        body.get_hurt(damage, position.x, true)
         
     if body.name == "Bullet":
-        get_hurt()
+        get_hurt(body.damage)
         body.hit_enemy()
         
         
-func get_hurt():
+func get_hurt(damage: int):
     set_modulate(Color(1, 0.3, 0.3, 0.3))
     velocity.x = 0
     $HitEffectTimeout.start(.1)
-    
+    health -= damage
+    if health <= 0:
+        queue_free()
+
 
 func _on_HitEffectTimeout_timeout():
     set_modulate(Color(1, 1, 1, 1))
