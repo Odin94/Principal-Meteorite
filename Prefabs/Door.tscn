@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Sprites/home-grown/doors/door3.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/home-grown/doors/door2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/home-grown/doors/door4.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/home-grown/doors/door1.png" type="Texture" id=4]
+[ext_resource path="res://Prefabs/Door.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "opening",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13.75, 32.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 36, 32 )
+
+[node name="Door" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="DoorBlocker" type="KinematicBody2D" parent="."]
+collision_layer = 16
+collision_mask = 11
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBlocker"]
+position = Vector2( 2.25, 0 )
+shape = SubResource( 2 )
+
+[node name="EnterDoorArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoorArea"]
+position = Vector2( 12, 0 )
+shape = SubResource( 3 )
+
+[node name="OpenDoorArea" type="Area2D" parent="."]
+position = Vector2( -24, 0 )
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenDoorArea"]
+position = Vector2( 20, 0 )
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="EnterDoorArea" to="." method="_on_EnterDoorArea_body_entered"]
+[connection signal="area_entered" from="OpenDoorArea" to="." method="_on_OpenDoorArea_area_entered"]

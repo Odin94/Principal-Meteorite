@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Sprites/living-tissue-platform-files/PNG/layers/background_looped.png" type="Texture" id=6]
 [ext_resource path="res://Levels/HUD.gd" type="Script" id=7]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.160784 )
@@ -131,5 +132,13 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Door" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1968, 640 )
+scale = Vector2( 1, 2 )
+
+[node name="Door2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1968, 144 )
+scale = Vector2( 1, 1.5 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
