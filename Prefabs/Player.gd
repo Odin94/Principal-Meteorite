@@ -11,7 +11,7 @@ const jump_force = -1200
 
 var direction = 1
 
-var air_jump_count_max = 0
+var air_jump_count_max = 1
 var air_jump_count = air_jump_count_max
 var touched_ground_recently = true
 var jump_was_pressed = false
@@ -22,6 +22,7 @@ var bullet_damage = 10
 var in_hit_recovery = false
 var invincibility_time = 0.3
 
+var max_health = 99
 var health = 99
 
 signal health_changed
@@ -119,8 +120,9 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
     if $InvincibilityTimer.is_stopped():
         health -= damage
         print(health)
-        emit_signal("health_changed", health)
+        emit_signal("health_changed", health, max_health)
         if health <= 0:
+            #warning-ignore:return_value_discarded
             get_tree().reload_current_scene()
 
         set_modulate(Color(1, 0.3, 0.3, 0.3))
@@ -139,3 +141,9 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
             
         else:
             $MinHitRecoveryTimer.start(invincibility_time / 2)
+
+
+func get_health_upgrade():
+    max_health += 99
+    health = max_health
+    emit_signal("health_changed", health, max_health)

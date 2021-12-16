@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Jump_Upgrade.png-4a76d90515960b44e71b360b8865ab9b.stex"
+path="res://.import/Jump_Upgrade.png-79dc7e1aa5937069834fb4b733014ccd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Jump_Upgrade.png"
-dest_files=[ "res://.import/Jump_Upgrade.png-4a76d90515960b44e71b360b8865ab9b.stex" ]
+source_file="res://Sprites/home-grown/Jump_Upgrade.png"
+dest_files=[ "res://.import/Jump_Upgrade.png-79dc7e1aa5937069834fb4b733014ccd.stex" ]
 
 [params]
 

@@ -6,6 +6,7 @@ var open = false
 
 func _on_EnterDoorArea_body_entered(body: Node2D):
     if body.name == "Player" and open:
+        #warning-ignore:return_value_discarded
         get_tree().reload_current_scene()
 
 
