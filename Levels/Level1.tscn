@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/HealthUpgrade.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/Jumper.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.160784 )
@@ -166,5 +167,8 @@ scale = Vector2( 1, 1.5 )
 
 [node name="HealthUpgrade" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1536, -296 )
+
+[node name="Jumper" parent="." instance=ExtResource( 11 )]
+position = Vector2( 144, 136 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
