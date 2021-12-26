@@ -6,9 +6,9 @@ const gravity = 45
 const jump_force = -1200
 
 export var direction = -1
-export var detects_cliffs = true
 export var health = 50
 export var damage = 20
+export var trigger_distance = 500
 
 onready var player: KinematicBody2D = get_tree().get_nodes_in_group("Player")[0]
 
@@ -34,7 +34,7 @@ func _physics_process(_delta):
 
 
 func jump():
-    if $JumpingCooldown.is_stopped() and position.distance_to(player.position) < 500:  # and idle animation at last frame?
+    if $JumpingCooldown.is_stopped() and position.distance_to(player.position) < trigger_distance:  # and idle animation at last frame?
         var x_pos_delta = player.position.x - position.x
         direction = x_pos_delta / abs(x_pos_delta)
         
