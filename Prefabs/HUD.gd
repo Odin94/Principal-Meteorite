@@ -7,6 +7,7 @@ func _ready():
     $HP.text = String(99)
 
 
+# requires player in scene to emit health_changed linked to HUD node
 func _on_Player_health_changed(health: int, max_health: int):
     re_draw_health_boxes(health, max_health)
         

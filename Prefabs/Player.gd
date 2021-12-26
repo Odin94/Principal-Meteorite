@@ -40,9 +40,6 @@ func _physics_process(_delta):
     if velocity.y > max_falling_speed:
         velocity.y = max_falling_speed
     
-    if velocity.y != gravity:
-        print(velocity.y)
-        
     # returns lowered y-velocity when colliding with floor, applies moving platform speed etc
     # Needs UP to know which way is up and which way is the floor (for eg. is_on_floor())
     velocity = move_and_slide(velocity, Vector2.UP) 
