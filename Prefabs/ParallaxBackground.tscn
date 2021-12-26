@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/living-tissue-platform-files/PNG/layers/background_looped.png" type="Texture" id=1]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="LivingWall" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 2304, 2304 )
+
+[node name="Sprite" type="Sprite" parent="LivingWall"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 0, 720, 1280 )

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Environment/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Enemies/Jumper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=5]
 
 [node name="Level2" type="Node2D"]
 
@@ -30,3 +31,5 @@ scale = Vector2( 1, 2 )
 
 [node name="Jumper" parent="." instance=ExtResource( 4 )]
 position = Vector2( -136, -328 )
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 5 )]
