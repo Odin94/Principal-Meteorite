@@ -36,7 +36,10 @@ func _physics_process(_delta):
 func jump():
     if $JumpingCooldown.is_stopped() and position.distance_to(player.position) < trigger_distance:  # and idle animation at last frame?
         var x_pos_delta = player.position.x - position.x
-        direction = x_pos_delta / abs(x_pos_delta)
+        var abs_pos_delta = abs(x_pos_delta)
+        if abs_pos_delta == 0:
+            abs_pos_delta += 1
+        direction = x_pos_delta / abs_pos_delta
         
         if position.distance_to(player.position) < 180:
             velocity.y = jump_force / 2
