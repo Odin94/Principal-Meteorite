@@ -34,10 +34,7 @@ func _ready():
     
     # make sure spawn_point has the right group
     for sp in get_tree().get_nodes_in_group("spawn_point"):
-        print(sp.name)
-        print(Globals.coming_from_door + "-spawn_point")
         if sp.name == (Globals.coming_from_door + "-spawn_point"):
-            print("found: ", sp.name)
             global_position = sp.global_position
             break
 
