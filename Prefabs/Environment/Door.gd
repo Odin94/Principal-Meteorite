@@ -7,6 +7,8 @@ export(String, FILE, "*.tscn") var next_level = "res://Levels/Level1.tscn"
 
 func _on_EnterDoorArea_body_entered(body: Node2D):
     if body.name == "Player" and open:
+        Globals.coming_from_door = name
+        Globals.player_direction = body.direction
         #warning-ignore:return_value_discarded
         get_tree().change_scene(next_level)
 

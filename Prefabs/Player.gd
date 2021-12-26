@@ -28,6 +28,19 @@ var health = 99
 
 signal health_changed
 
+func _ready():
+    direction = Globals.player_direction
+    $AnimatedSprite.flip_h = direction == -1
+    
+    # make sure spawn_point has the right group
+    for sp in get_tree().get_nodes_in_group("spawn_point"):
+        print(sp.name)
+        print(Globals.coming_from_door + "-spawn_point")
+        if sp.name == (Globals.coming_from_door + "-spawn_point"):
+            print("found: ", sp.name)
+            global_position = sp.global_position
+            break
+
 func _physics_process(_delta):
     if $MinHitRecoveryTimer.is_stopped() and is_on_floor():
         in_hit_recovery = false

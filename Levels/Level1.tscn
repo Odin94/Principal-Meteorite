@@ -83,13 +83,14 @@ scale = Vector2( 10, 2 )
 position = Vector2( 1720, 736 )
 scale = Vector2( 10, 2 )
 
-[node name="Door" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1968, 640 )
-scale = Vector2( 1, 2 )
-
-[node name="Door2" parent="." instance=ExtResource( 9 )]
+[node name="Door-Lvl1-1" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1968, 144 )
 scale = Vector2( 1, 1.5 )
+
+[node name="Door-Lvl1-2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1968, 640 )
+scale = Vector2( 1, 2 )
+next_level = "res://Levels/Level2.tscn"
 
 [node name="HealthUpgrade" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1536, -296 )
@@ -97,5 +98,8 @@ position = Vector2( 1536, -296 )
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
+
+[node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 1921, 664 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

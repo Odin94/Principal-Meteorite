@@ -14,6 +14,10 @@ config/name="Principal Meteorite"
 run/main_scene="res://Levels/Level1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://Prefabs/Globals.gd"
+
 [global]
 
 layer=false
