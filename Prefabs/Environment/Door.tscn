@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/home-grown/doors/door2.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/home-grown/doors/door4.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/home-grown/doors/door1.png" type="Texture" id=4]
-[ext_resource path="res://Prefabs/Door.gd" type="Script" id=5]
+[ext_resource path="res://Prefabs/Environment/Door.gd" type="Script" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

@@ -2,12 +2,12 @@
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/JumpUpgrade.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/Crab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/DamagingArea.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Upgrades/JumpUpgrade.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Enemies/Crab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Environment/DamagingArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/living-tissue-platform-files/PNG/layers/background_looped.png" type="Texture" id=6]
-[ext_resource path="res://Prefabs/Door.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Prefabs/HealthUpgrade.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/Environment/Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Prefabs/Upgrades/HealthUpgrade.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=11]
 
 [node name="Level1" type="Node2D"]
