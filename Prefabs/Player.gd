@@ -7,6 +7,7 @@ onready var shooting_cooldown = $ShootingCooldown
 var velocity := Vector2(0, 0)
 const speed = 300
 const gravity = 45
+const max_falling_speed = 1500
 const jump_force = -1200
 
 var direction = 1
@@ -36,6 +37,11 @@ func _physics_process(_delta):
         process_input()
 
     velocity.y += gravity
+    if velocity.y > max_falling_speed:
+        velocity.y = max_falling_speed
+    
+    if velocity.y != gravity:
+        print(velocity.y)
         
     # returns lowered y-velocity when colliding with floor, applies moving platform speed etc
     # Needs UP to know which way is up and which way is the floor (for eg. is_on_floor())
