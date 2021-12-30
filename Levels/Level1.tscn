@@ -95,11 +95,11 @@ next_level = "res://Levels/Level2.tscn"
 [node name="HealthUpgrade" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1536, -296 )
 
+[node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 1921, 664 )
+
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
-
-[node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 1921, 664 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
