@@ -1,4 +1,14 @@
 
+## Development
+* When adding new enemies:
+    * Make sure to set collision layer and mask
+    * Make sure to wire the signals
+
+* When adding a new level:
+    * Make sure to include HUD & ParallaxBackground
+    * Wire player health_changed to HUD
+    * Adjust tilemap size to 16/16 and scale 2
+
 
 ## Credits
 * Player sprite: [ronny14](https://www.youtube.com/user/pizzaguy14)
