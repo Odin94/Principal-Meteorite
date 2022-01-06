@@ -27,15 +27,15 @@ animations = [ {
 "name": "_idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "death",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "walking",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "death",
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]

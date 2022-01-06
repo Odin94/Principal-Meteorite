@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Prefabs/Enemies/Squid.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/octopus/octopus-3.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/octopus/octopus-1.png" type="Texture" id=5]
 [ext_resource path="res://Audio/enemy_death.wav" type="AudioStream" id=6]
 [ext_resource path="res://Audio/enemy_hurt.wav" type="AudioStream" id=7]
+[ext_resource path="res://Prefabs/Enemies/Attacks/SquidBullet.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 20.4667 )
@@ -18,14 +19,14 @@ animations = [ {
 "name": "sleeping",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "moving",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "moving",
 "speed": 5.0
 } ]
 
@@ -33,7 +34,10 @@ animations = [ {
 extents = Vector2( 64, 108 )
 
 [node name="Squid" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 16
 script = ExtResource( 1 )
+SquidBullet = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4, -1.66675 )
@@ -58,9 +62,21 @@ shape = SubResource( 3 )
 wait_time = 0.1
 one_shot = true
 
+[node name="TurnAroundCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShootingCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 volume_db = -5.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[connection signal="area_entered" from="DamageArea" to="." method="_on_DamageArea_area_entered"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="HitEffectTimeout" to="." method="_on_HitEffectTimeout_timeout"]
