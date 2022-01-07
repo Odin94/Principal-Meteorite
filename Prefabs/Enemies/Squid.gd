@@ -45,8 +45,7 @@ func shoot():
         bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
         
         bullet.set_damage(damage)
-        # TODO: Aim for center mass, maybe re-open this thread https://godotengine.org/qa/38373/problem-involving-vectors-and-shooting-at-the-player ?
-        bullet.set_direction(position.direction_to(player.global_position))
+        bullet.set_direction(bullet.position.direction_to(player.global_position))
         bullet.limit_lifespan(bullet_lifespan)        
         
         $ShootingCooldown.start()
