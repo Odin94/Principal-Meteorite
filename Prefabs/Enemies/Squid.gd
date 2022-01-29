@@ -2,13 +2,16 @@ extends KinematicBody2D
 
 export (PackedScene) var SquidBullet
 
-var velocity := Vector2(0, 30)
-const speed = 100
+var velocity := Vector2(0, 0)
+var speed = 100
 var gravity = 0
 
 export var direction = -1
-export var health = 750
+export var health = 350
 export var damage = 20
+
+const phase_1_health_cutoff = 200
+const phase_2_health_cutoff = 75
 
 var bullet_lifespan = 1
 
@@ -21,7 +24,7 @@ func _ready():
     if direction == 1:
         $AnimatedSprite.flip_h = true
     $AnimatedSprite.play("sleeping")
-    float_up_down()
+    float_up_down(0)
 
 
 func _physics_process(_delta):
@@ -46,11 +49,11 @@ func _physics_process(_delta):
     velocity = move_and_slide(velocity, Vector2.UP)
 
 
-func float_up_down():
-    yield(get_tree().create_timer(2), "timeout")
-    velocity.y *= -1
-    if phase == 0:
-        float_up_down()
+func float_up_down(floating_phase, float_velocity = 30, direction_change_timeout = 2):
+    velocity.y = float_velocity
+    yield(get_tree().create_timer(direction_change_timeout), "timeout")
+    if phase == floating_phase:
+        float_up_down(floating_phase, -float_velocity, direction_change_timeout)
 
 func process_phase_0():
     if position.distance_to(player.position) < trigger_distance:
@@ -61,53 +64,68 @@ func process_phase_0():
 
 
 func process_phase_1():
-    velocity.y = 0
     shoot()
 
 
 func process_phase_2():
-    pass
+    shoot(2)
     
 func process_phase_3():
-    pass
+    shoot(8)
     
 func enter_phase_1():
     if phase >= 1:
         return
+    velocity.y = 0    
+    phase = 1
     $AnimatedSprite.play("moving")
     velocity = Vector2(0, 0)
-    phase = 1
-    
+
 
 func enter_phase_2():
     if phase >= 2:
         return
+    print("phase 2")
     phase = 2
-    
+    velocity = Vector2(0, 0)
+    speed = 200
+    float_up_down(phase, 60, 4)
+
 
 func enter_phase_3():
     if phase >= 3:
         return
+    print("phase 3")
     phase = 3
+    velocity = Vector2(0, 0)
+    speed = 300
+    float_up_down(phase, 100, 3)
     
 
-func shoot():
+func shoot(bullet_count = 1):
     if $ShootingCooldown.is_stopped():
-        # $ShotSound.play()
-        var bullet: Area2D = SquidBullet.instance()
-        
-        owner.add_child(bullet)
-        bullet.transform = global_transform
-        
-        var bullet_offset = $AnimatedSprite.frames.get_frame("_idle", 0).get_width() * 0.9
-        bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
-        
-        bullet.set_damage(damage)
-        bullet.set_direction(bullet.position.direction_to(player.global_position))
-        bullet.limit_lifespan(bullet_lifespan)
-        bullet.scale = Vector2(4, 4)
-        
         $ShootingCooldown.start()
+        spawn_bullet(bullet_count)
+
+
+func spawn_bullet(total = 1, i = 1):
+    print("bawlet")
+    var bullet = SquidBullet.instance()
+    
+    owner.add_child(bullet)
+    bullet.transform = global_transform
+    
+    var bullet_offset = $AnimatedSprite.frames.get_frame("_idle", 0).get_width() * 0.9
+    bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
+    
+    bullet.set_damage(damage)
+    bullet.set_direction(bullet.position.direction_to(player.global_position))
+    bullet.limit_lifespan(bullet_lifespan)
+    bullet.scale = Vector2(4, 4)
+    
+    yield(get_tree().create_timer(.1), "timeout")
+    if (i < total):
+        spawn_bullet(total, i + 1)
 
 
 func change_direction():
@@ -142,9 +160,9 @@ func get_hurt(incoming_damage: int):
     $HitEffectTimeout.start(.1)
     health -= incoming_damage
     
-    if health <= 500:
+    if health <= phase_1_health_cutoff:
         enter_phase_2()
-    if health <= 250:
+    if health <= phase_2_health_cutoff:
         enter_phase_3()
     if health <= 0:
         die()
