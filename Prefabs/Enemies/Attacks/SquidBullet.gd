@@ -1,7 +1,7 @@
 extends Area2D
 
 
-const speed = 15
+const speed = 20
 
 var direction := Vector2(0, 0)
 var velocity := Vector2(0, 0)
@@ -48,7 +48,6 @@ func hit_enemy():
     
 
 func impact():
-    print("impact")
     if not impacting:
         impacting = true
         $AnimatedSprite.play("impact")

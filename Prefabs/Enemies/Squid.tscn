@@ -66,7 +66,7 @@ one_shot = true
 one_shot = true
 
 [node name="ShootingCooldown" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 autostart = true
 

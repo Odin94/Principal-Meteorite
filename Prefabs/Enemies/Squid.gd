@@ -35,9 +35,9 @@ func _physics_process(_delta):
 
 func shoot():
     if $ShootingCooldown.is_stopped():
-        print("shooting")
         # $ShotSound.play()
-        var bullet = SquidBullet.instance()
+        var bullet: Area2D = SquidBullet.instance()
+        
         owner.add_child(bullet)
         bullet.transform = global_transform
         
@@ -46,7 +46,8 @@ func shoot():
         
         bullet.set_damage(damage)
         bullet.set_direction(bullet.position.direction_to(player.global_position))
-        bullet.limit_lifespan(bullet_lifespan)        
+        bullet.limit_lifespan(bullet_lifespan)
+        bullet.scale = Vector2(4, 4)
         
         $ShootingCooldown.start()
 
