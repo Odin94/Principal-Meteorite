@@ -32,6 +32,8 @@ func _ready():
     direction = Globals.player_direction
     $AnimatedSprite.flip_h = direction == -1
     
+    init_upgrades()
+    
     # make sure spawn_point has the right group
     for sp in get_tree().get_nodes_in_group("spawn_point"):
         if sp.name == (Globals.coming_from_door + "-spawn_point"):
@@ -127,8 +129,8 @@ func jump():
         air_jump_count -= 1
     touched_ground_recently = false
     $JumpSound.play()
-    
-    
+
+
 func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: bool = true):
     if $InvincibilityTimer.is_stopped():
         health -= damage
@@ -148,10 +150,10 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
                 velocity.x = -1200
             else:
                 velocity.x = 1200
-            
+
             in_hit_recovery = true
             $MinHitRecoveryTimer.start()
-            
+
         else:
             $MinHitRecoveryTimer.start(invincibility_time / 2)
 
@@ -159,4 +161,20 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
 func get_health_upgrade():
     max_health += 99
     health = max_health
+    emit_signal("health_changed", health, max_health)
+
+func save_stats():
+    Globals.player_health = health
+
+
+func init_upgrades():
+    for upgrade in Globals.collected_health_powerups:
+        max_health += 99
+    
+    for upgrade in Globals.collected_jump_powerups:
+        air_jump_count_max += 1
+    
+    health = Globals.player_health
+    
+    yield(get_tree().create_timer(.01), "timeout")  # need to delay signal because otherwise HUD may not be initialized yet
     emit_signal("health_changed", health, max_health)
