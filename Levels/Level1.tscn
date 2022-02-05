@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Prefabs/Enemies/Crab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Environment/DamagingArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/Upgrades/FireBeamUpgrade.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Environment/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Upgrades/HealthUpgrade.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=11]
@@ -35,6 +34,10 @@ drag_margin_v_enabled = true
 
 [node name="JumpUpgrade_1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -160, 312 )
+
+[node name="HealthUpgrade_2" parent="." instance=ExtResource( 10 )]
+position = Vector2( -456, -200 )
+z_index = -4
 
 [node name="Crab" parent="." instance=ExtResource( 4 )]
 position = Vector2( 912, 157 )
@@ -93,17 +96,11 @@ position = Vector2( 1968, 640 )
 scale = Vector2( 1, 2 )
 next_level = "res://Levels/Level2.tscn"
 
-[node name="HealthUpgrade_1" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1536, -296 )
-
 [node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 1921, 664 )
 
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
-
-[node name="FireBeamUpgrade" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1840, 136 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

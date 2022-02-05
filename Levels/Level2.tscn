@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Prefabs/Enemies/Crab.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Environment/DamagingArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/Upgrades/HealthUpgrade.tscn" type="PackedScene" id=9]
 
 [node name="Level2" type="Node2D"]
 
@@ -78,5 +79,17 @@ position = Vector2( -224, 52 )
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 5 )]
+
+[node name="Crab3" parent="." instance=ExtResource( 6 )]
+position = Vector2( -448, -278 )
+
+[node name="Crab4" parent="." instance=ExtResource( 6 )]
+position = Vector2( -96, -278 )
+
+[node name="Crab5" parent="." instance=ExtResource( 6 )]
+position = Vector2( -472, -688 )
+
+[node name="HealthUpgrade_3" parent="." instance=ExtResource( 9 )]
+position = Vector2( -528, -688 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

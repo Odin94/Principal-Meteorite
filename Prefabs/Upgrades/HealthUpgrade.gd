@@ -9,6 +9,7 @@ func _on_Area2D_body_entered(body: Node2D):
         body.get_health_upgrade()
         print("Found health upgrade!")
         $PauseTimer.start()
+        z_index = 5
         $PickUpSound.play()
         $PickUpText.visible = true
         get_tree().paused = true
