@@ -19,6 +19,7 @@ var jump_was_pressed = false
 
 var bullet_lifespan = 0.2
 var bullet_damage = 10
+var bullet_color := Color(1, 1, 1)
 
 var in_hit_recovery = false
 var invincibility_time = 0.3
@@ -107,7 +108,8 @@ func shoot():
         
         bullet.set_damage(bullet_damage)
         bullet.set_direction(Vector2(direction, 0))
-        bullet.limit_lifespan(bullet_lifespan)        
+        bullet.limit_lifespan(bullet_lifespan)
+        bullet.modulate = bullet_color
         
         shooting_cooldown.start()  # Timer node has Wait Time & One Shot to run only once for a certain time
 
@@ -162,6 +164,13 @@ func get_health_upgrade():
     max_health += 99
     health = max_health
     emit_signal("health_changed", health, max_health)
+    
+    
+func get_fire_beam_upgrade():
+    bullet_lifespan = .6
+    bullet_damage = 15
+    bullet_color = Color(1, .7, .7)
+
 
 func save_stats():
     Globals.player_health = health
@@ -173,6 +182,9 @@ func init_upgrades():
     
     for upgrade in Globals.collected_jump_powerups:
         air_jump_count_max += 1
+        
+    if Globals.collected_beam_powerups.has("FireBeamUpgrade"):
+        get_fire_beam_upgrade()
     
     health = Globals.player_health
     

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Prefabs/Enemies/Crab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Environment/DamagingArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Prefabs/Upgrades/FireBeamUpgrade.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Environment/Door.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Upgrades/HealthUpgrade.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=11]
@@ -101,5 +102,8 @@ position = Vector2( 1921, 664 )
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
+
+[node name="FireBeamUpgrade" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1840, 136 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
