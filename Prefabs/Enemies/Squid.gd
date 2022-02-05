@@ -99,6 +99,7 @@ func enter_phase_3():
     phase = 3
     velocity = Vector2(0, 0)
     speed = 300
+    $ShootingCooldown.wait_time = 2.5
     float_up_down(phase, 100, 3)
     
 
