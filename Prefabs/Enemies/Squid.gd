@@ -7,11 +7,11 @@ var speed = 100
 var gravity = 0
 
 export var direction = -1
-export var health = 350
-export var damage = 20
+export var health = 400
+export var damage = 25
 
-const phase_1_health_cutoff = 200
-const phase_2_health_cutoff = 75
+const phase_1_health_cutoff = 250
+const phase_2_health_cutoff = 125
 
 var bullet_lifespan = 1
 
@@ -99,7 +99,6 @@ func enter_phase_3():
     phase = 3
     velocity = Vector2(0, 0)
     speed = 300
-    $ShootingCooldown.wait_time = 2.5
     float_up_down(phase, 100, 3)
     
 
