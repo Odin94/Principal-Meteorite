@@ -177,5 +177,21 @@ func die():
     $DeathSound.play()
     # TODO: Play cool death animation stuff
     set_modulate(Color(1, 1, 1, 1))
+    $AnimatedSprite.play("death")
     yield($AnimatedSprite, "animation_finished")
+    give_player_upgrades()
+    
+    
+func give_player_upgrades():
+    player.air_jump_count_max += 3
+    Globals.collected_jump_powerups.append_array(["squidJump1", "squidJump2", "squidJump3"])
+    $PauseTimer.start()
+    $PickUpSound.play()
+    $PickUpText.visible = true
+    get_tree().paused = true
+
+
+func _on_PauseTimer_timeout():
+    print("unpaused")
+    get_tree().paused = false
     queue_free()

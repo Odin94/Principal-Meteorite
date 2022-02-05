@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Prefabs/Enemies/Squid.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/octopus/octopus-3.png" type="Texture" id=2]
@@ -8,6 +8,13 @@
 [ext_resource path="res://Audio/enemy_death.wav" type="AudioStream" id=6]
 [ext_resource path="res://Audio/enemy_hurt.wav" type="AudioStream" id=7]
 [ext_resource path="res://Prefabs/Enemies/Attacks/SquidBullet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Audio/powerup_sound.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-3.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-1.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-5.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-2.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-4.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 20.4667 )
@@ -24,6 +31,11 @@ animations = [ {
 "name": "_idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "death",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "moving",
@@ -32,6 +44,10 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 64, 108 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 9 )
 
 [node name="Squid" type="KinematicBody2D"]
 collision_layer = 8
@@ -77,6 +93,29 @@ volume_db = -5.0
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 
+[node name="PauseTimer" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 1.5
+one_shot = true
+
+[node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
+stream = ExtResource( 10 )
+
+[node name="PickUpText" type="RichTextLabel" parent="."]
+visible = false
+margin_left = -78.0
+margin_top = -112.0
+margin_right = 88.0
+margin_bottom = -56.0
+custom_fonts/normal_font = SubResource( 4 )
+text = "Jump +3"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="area_entered" from="DamageArea" to="." method="_on_DamageArea_area_entered"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_HitEffectTimeout_timeout"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_PauseTimer_timeout"]
