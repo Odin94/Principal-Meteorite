@@ -1,4 +1,7 @@
 
+## Setup
+* Open with Godot game engine (tested with v3.4 on Windows)
+
 ## Development
 * When adding new enemies:
     * Make sure to set collision layer and mask
