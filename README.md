@@ -15,7 +15,6 @@
 
 
 ## Planned features
-* Menu with `New Game` and `Load` options
 * Quick intro when starting a new game
 * Saving
 * Quick death screen
