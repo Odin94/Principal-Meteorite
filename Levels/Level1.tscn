@@ -90,11 +90,15 @@ scale = Vector2( 10, 2 )
 [node name="Door-Lvl1-1" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1968, 144 )
 scale = Vector2( 1, 1.5 )
+next_level = "res://Levels/Level4.tscn"
 
 [node name="Door-Lvl1-2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1968, 640 )
 scale = Vector2( 1, 2 )
 next_level = "res://Levels/Level2.tscn"
+
+[node name="Door-Lvl4-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 1921, 144 )
 
 [node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 1921, 664 )

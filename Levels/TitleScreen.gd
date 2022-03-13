@@ -10,7 +10,7 @@ func _on_Start_pressed():
 
 
 func _on_Load_pressed():
-    pass # Replace with function body.
+    Globals.load()
 
 
 func _on_Exit_pressed():

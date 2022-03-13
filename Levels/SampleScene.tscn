@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
+[ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=4]
 
 [node name="SampleScene" type="Node2D"]
 
@@ -14,3 +17,15 @@ format = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 592, 1976 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
