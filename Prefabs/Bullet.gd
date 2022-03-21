@@ -31,7 +31,7 @@ func set_damage(new_damage: int):
 
 
 func _on_Bullet_body_entered(body: Node2D):
-    if body is TileMap or body.name == "DoorBlocker":
+    if body is TileMap or body.name == "DoorBlocker" or body.name == "StaticBody2D":
         impact()
 
 

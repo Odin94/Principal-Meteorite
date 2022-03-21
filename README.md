@@ -16,7 +16,6 @@
 
 ## Planned features
 * Quick intro when starting a new game
-* Indicate that the game is saved in save rooms
 * Quick death screen
 * Auto-load last save on death
 * 2nd boss fight
