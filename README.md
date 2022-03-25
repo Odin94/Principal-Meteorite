@@ -18,10 +18,14 @@
 * Quick intro when starting a new game
 * 2nd boss fight
 * Quick end screen
+* Make enemies drop health sometimes
+* More levels
 * Add missing audio
     * Boss sounds
     * Background music
     * Bullet impact sound
+    * Enemy sounds
+    * Running sounds?
 
 
 ## Credits
