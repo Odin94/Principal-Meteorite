@@ -11,12 +11,17 @@ config_version=4
 [application]
 
 config/name="Principal Meteorite"
-run/main_scene="res://Levels/Level1.tscn"
+run/main_scene="res://Levels/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Globals="*res://Prefabs/Globals.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [global]
 
