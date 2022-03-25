@@ -14,20 +14,19 @@
 [ext_resource path="res://Audio/enemy_hurt.wav" type="AudioStream" id=15]
 [ext_resource path="res://Audio/enemy_death.wav" type="AudioStream" id=16]
 
-
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33.3333, 25 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "_idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "jumping",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "_idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 10 ) ],
@@ -54,7 +53,7 @@ shape = SubResource( 3 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "_idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="DamageArea" type="Area2D" parent="."]

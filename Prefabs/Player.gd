@@ -27,6 +27,8 @@ var invincibility_time = 0.3
 var max_health = 99
 var health = 99
 
+var dead = false
+
 signal health_changed
 
 func _ready():
@@ -42,6 +44,9 @@ func _ready():
             break
 
 func _physics_process(_delta):
+    if (dead):
+        return
+    
     if $MinHitRecoveryTimer.is_stopped() and is_on_floor():
         in_hit_recovery = false
         set_modulate(Color(1, 1, 1, 1))
@@ -61,6 +66,9 @@ func _physics_process(_delta):
 
 
 func process_input():
+    if (dead):
+        return
+
     if Input.is_action_pressed("right"):
         velocity.x = speed
         direction = 1
@@ -134,13 +142,15 @@ func jump():
 
 
 func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: bool = true):
+    if (dead):
+        return
+
     if $InvincibilityTimer.is_stopped():
         health -= damage
         print(health)
         emit_signal("health_changed", health, max_health)
         if health <= 0:
-            #warning-ignore:return_value_discarded
-            get_tree().reload_current_scene()
+            die()
 
         set_modulate(Color(1, 0.3, 0.3, 0.3))
         $HurtSound.play()
@@ -158,6 +168,14 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
 
         else:
             $MinHitRecoveryTimer.start(invincibility_time / 2)
+
+
+func die():
+    dead = true
+    $AnimatedSprite.play("death")
+    $DeathSound.play()
+    yield(get_tree().create_timer(5), "timeout")
+    get_tree().change_scene("res://Levels/TitleScreen.tscn")
 
 
 func get_health_upgrade():

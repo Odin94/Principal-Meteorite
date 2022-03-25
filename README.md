@@ -16,8 +16,6 @@
 
 ## Planned features
 * Quick intro when starting a new game
-* Quick death screen
-* Auto-load last save on death
 * 2nd boss fight
 * Quick end screen
 * Add missing audio
@@ -33,3 +31,4 @@
 * Sounds:
     * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
     * Shooting, hurt-sounds, death-sounds made with [sfxr](https://sfxr.me)
+    * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)
