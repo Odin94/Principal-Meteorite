@@ -2,6 +2,7 @@ extends Node2D
 
 const min_scale = 1
 const max_scale = 1.3
+const scaling_speed = .03
 var target_scale = max_scale
 
 func _ready():
@@ -9,8 +10,8 @@ func _ready():
         queue_free()
 
 func _physics_process(_delta):
-    $Area2D/Sprite.scale.x = lerp($Area2D/Sprite.scale.x, target_scale, .03)
-    $Area2D/Sprite.scale.y = lerp($Area2D/Sprite.scale.y, target_scale, .03)
+    $Area2D/Sprite.scale.x = lerp($Area2D/Sprite.scale.x, target_scale, scaling_speed)
+    $Area2D/Sprite.scale.y = lerp($Area2D/Sprite.scale.y, target_scale, scaling_speed)
     if $Area2D/Sprite.scale.x >= (max_scale - 0.05):
         target_scale = min_scale
     elif $Area2D/Sprite.scale.x <= (min_scale + 0.05):

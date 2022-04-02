@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
+export (PackedScene) var HealthDrop
+
 var velocity := Vector2(0, 0)
 const speed = 500
 const gravity = 45
 const jump_force = -1200
+onready var rng = RandomNumberGenerator.new()
 
 export var direction = -1
 export var health = 50
@@ -12,11 +15,14 @@ export var trigger_distance = 500
 
 onready var player: KinematicBody2D = get_tree().get_nodes_in_group("Player")[0]
 
+var dead = false
+
 func _ready():
     $AnimatedSprite.play("_idle")
+    rng.randomize()
 
 func _physics_process(_delta):
-    if health <= 0:
+    if dead:
         return
 
     if $HitEffectTimeout.is_stopped():
@@ -51,7 +57,7 @@ func jump():
 
 
 func _on_DamageArea_body_entered(body: Node2D):
-    if health <= 0:
+    if dead:
         return
 
     if body.name == "Player":
@@ -79,8 +85,18 @@ func _on_HitEffectTimeout_timeout():
     velocity.x = speed * direction
 
 func die():
+    if dead:
+        return
+        
+    dead = true
+    
     $DeathSound.play()
     $AnimatedSprite.play("death")
     set_modulate(Color(1, 1, 1, 1))
     yield($AnimatedSprite, "animation_finished")
+    
+    if rng.randf_range(0, 10.0) > 5:
+        var health_drop = HealthDrop.instance()
+        owner.add_child(health_drop)
+        health_drop.transform = global_transform
     queue_free()

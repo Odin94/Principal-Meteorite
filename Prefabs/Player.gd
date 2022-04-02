@@ -147,7 +147,6 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
 
     if $InvincibilityTimer.is_stopped():
         health -= damage
-        print(health)
         emit_signal("health_changed", health, max_health)
         if health <= 0:
             die()
@@ -189,6 +188,11 @@ func get_fire_beam_upgrade():
     bullet_damage = 15
     bullet_color = Color(1, .7, .7)
 
+
+func get_health_pickup(heal_amount: int):
+    health = min(health + heal_amount, max_health)
+    emit_signal("health_changed", health, max_health)
+    
 
 func save_stats():
     Globals.player_health = health
