@@ -14,13 +14,10 @@ func _physics_process(_delta):
         target_height = min_height
     elif $Area2D/Sprite.position.y <= (min_height + 0.5):
         target_height = max_height
-    print($Area2D/Sprite.position.y)
-    print(target_height)
 
 func _on_Area2D_body_entered(body: Node2D):
     if body.name == "Player":
         body.air_jump_count_max += 1
-        print("Found jump upgrade!")
         $PauseTimer.start()
         $PickUpSound.play()
         $PickUpText.visible = true
