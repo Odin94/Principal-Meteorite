@@ -55,7 +55,6 @@ shape = SubResource( 3 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "_idle"
-playing = true
 
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 32
