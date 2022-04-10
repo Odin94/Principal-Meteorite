@@ -16,6 +16,7 @@ var air_jump_count_max = 1
 var air_jump_count = air_jump_count_max
 var touched_ground_recently = true
 var jump_was_pressed = false
+var bouncing = false
 
 var bullet_lifespan = 0.2
 var bullet_damage = 10
@@ -84,15 +85,17 @@ func process_input():
         
     if not is_on_floor():
         $AnimatedSprite.play("jumping")
-        if not Input.is_action_pressed("jump") and velocity.y < 0:
+        if not Input.is_action_pressed("jump") and velocity.y < 0 and not bouncing:
             velocity.y = 0
         limit_floorless_jump_time()
     
-    if is_on_floor():
-        touched_ground_recently = true
-        air_jump_count = air_jump_count_max
-        if jump_was_pressed:
-            jump()
+    if is_on_floor() :
+        if $BounceTimer.is_stopped():
+            touched_ground_recently = true
+            bouncing = false
+            air_jump_count = air_jump_count_max
+            if jump_was_pressed:
+                jump()
 
     if Input.is_action_just_pressed("jump"):
         jump_was_pressed = true
@@ -139,6 +142,14 @@ func jump():
         air_jump_count -= 1
     touched_ground_recently = false
     $JumpSound.play()
+
+
+func bounce(bounce_force: int):
+    $BounceTimer.start()
+    bouncing = true
+    velocity.y = bounce_force
+    air_jump_count = 0
+    touched_ground_recently = false
 
 
 func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: bool = true):

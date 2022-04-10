@@ -53,3 +53,7 @@ one_shot = true
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="BounceTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
