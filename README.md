@@ -22,7 +22,7 @@
 * Add missing audio
     * Boss sounds
     * Background music
-    * Bullet impact sound
+    * Picking up health
     * Enemy sounds
     * Running sounds?
 
