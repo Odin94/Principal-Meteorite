@@ -12,6 +12,10 @@ var collected_beam_powerups: Array = []
 var player_health = 99
 
 
+func _ready():
+    OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size() * 0.5 - OS.get_window_size() * 0.5)
+
+
 func save():
     var save_game = File.new()
     save_game.open(save_path, File.WRITE)
