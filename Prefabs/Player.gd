@@ -74,6 +74,7 @@ func process_input():
         velocity.x = speed
         direction = 1
         $AnimatedSprite.play("running")
+        $WalkingSound.play()
         $AnimatedSprite.flip_h = false
     elif Input.is_action_pressed("left"):
         velocity.x = -speed
