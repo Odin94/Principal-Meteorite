@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pick_up_health.wav-5b3e568f14d1fcb328d1234cd50bb767.sample"
+
+[deps]
+
+source_file="res://Audio/pick_up_health.wav"
+dest_files=[ "res://.import/pick_up_health.wav-5b3e568f14d1fcb328d1234cd50bb767.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

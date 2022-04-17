@@ -28,4 +28,7 @@ func _on_HealthDrop_body_entered(body: Node2D):
     if body.name == "Player":
         body.get_health_pickup(heal_amount)
         active = false
+        $PickUpSound.play()
+        $Sprite.visible = false
+        yield($PickUpSound, "finished")
         queue_free()

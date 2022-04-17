@@ -22,7 +22,6 @@
 * Add missing audio
     * Boss sounds
     * Background music
-    * Picking up health
     * Enemy sounds
     * Running sounds?
 
@@ -33,5 +32,5 @@
 * Font: Open Sans
 * Sounds:
     * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
-    * Shooting, hurt-sounds, death-sounds made with [sfxr](https://sfxr.me)
+    * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
     * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)
