@@ -74,18 +74,23 @@ func process_input():
         velocity.x = speed
         direction = 1
         $AnimatedSprite.play("running")
-        $WalkingSound.play()
+        if not $WalkingSound.playing:
+            $WalkingSound.play()
         $AnimatedSprite.flip_h = false
     elif Input.is_action_pressed("left"):
         velocity.x = -speed
         direction = -1
         $AnimatedSprite.play("running")
+        if not $WalkingSound.playing:
+            $WalkingSound.play()
         $AnimatedSprite.flip_h = true
     else:
+        $WalkingSound.stop()
         $AnimatedSprite.play("_idle")
         
     if not is_on_floor():
         $AnimatedSprite.play("jumping")
+        $WalkingSound.stop()
         if not Input.is_action_pressed("jump") and velocity.y < 0 and not bouncing:
             velocity.y = 0
         limit_floorless_jump_time()

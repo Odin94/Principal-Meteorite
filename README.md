@@ -23,7 +23,7 @@
     * Boss sounds
     * Background music
     * Enemy sounds
-    * Running sounds?
+    * Better walking sound?
 
 
 ## Credits
@@ -32,6 +32,5 @@
 * Font: Open Sans
 * Sounds:
     * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
-    * walking [SaxPax](https://freesound.org/s/507964/)
     * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
     * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)
