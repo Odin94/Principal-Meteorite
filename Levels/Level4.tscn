@@ -46,3 +46,5 @@ position = Vector2( 168, 2176 )
 
 [node name="Saver" parent="." instance=ExtResource( 7 )]
 position = Vector2( 624, 2224 )
+
+[connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

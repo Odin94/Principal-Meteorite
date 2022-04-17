@@ -29,3 +29,5 @@ drag_margin_v_enabled = true
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+
+[connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
