@@ -3,6 +3,7 @@ extends Node2D
 var enabled = true
 export var bounce_force = -5500
 
+
 func _on_Area2D_body_entered(body):
     if body.name == "Player" and enabled:
         enabled = false

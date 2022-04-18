@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/home-grown/jump_pad/jump_pad2.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/home-grown/jump_pad/jump_pad.png" type="Texture" id=2]
@@ -22,8 +22,14 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13, 5 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 33.1875, 3.75 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 28, 1 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24.5, 1 )
 
 [node name="JumpPad" type="Node2D"]
 script = ExtResource( 4 )
@@ -36,17 +42,8 @@ animation = "_idle"
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 6 )
 shape = SubResource( 2 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 16
-collision_mask = 27
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 12 )
-scale = Vector2( 1, 0.2 )
-shape = SubResource( 3 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -54,6 +51,31 @@ wait_time = 0.5
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 10 )
+scale = Vector2( 1, 0.2 )
+shape = SubResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( 0, 9 )
+shape = SubResource( 4 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2( 0.5, 7 )
+shape = SubResource( 5 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

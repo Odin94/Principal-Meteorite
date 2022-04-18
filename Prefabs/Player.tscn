@@ -9,8 +9,8 @@
 [ext_resource path="res://Audio/death_scream.wav" type="AudioStream" id=7]
 [ext_resource path="res://Audio/walking.wav" type="AudioStream" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 29.5 )
+[sub_resource type="CapsuleShape2D" id=1]
+height = 35.0
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = -25
@@ -21,16 +21,16 @@ __meta__ = {
 }
 Bullet = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 8.5 )
-shape = SubResource( 1 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 2, 5 )
 scale = Vector2( 2.0625, 2.1 )
 frames = ExtResource( 1 )
 animation = "_idle"
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 10.5 )
+shape = SubResource( 1 )
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

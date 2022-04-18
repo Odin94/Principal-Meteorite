@@ -61,7 +61,8 @@ func _physics_process(_delta):
     
     # returns lowered y-velocity when colliding with floor, applies moving platform speed etc
     # Needs UP to know which way is up and which way is the floor (for eg. is_on_floor())
-    velocity = move_and_slide(velocity, Vector2.UP) 
+    # only setting .y here to make walking on slopes work
+    velocity.y = move_and_slide(velocity, Vector2.UP, true).y
 
     velocity.x = lerp(velocity.x, 0, 0.25)  # lerp = linear interpolation  # weight can be constant because _physics_process delta is constant
 
