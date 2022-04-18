@@ -18,6 +18,8 @@ var bullet_lifespan = 1
 var trigger_distance = 180
 var phase = 0
 
+signal death
+
 onready var player: KinematicBody2D = get_tree().get_nodes_in_group("Player")[0]
 
 func _ready():
@@ -180,6 +182,7 @@ func die():
     $AnimatedSprite.play("death")
     yield($AnimatedSprite, "animation_finished")
     give_player_upgrades()
+    emit_signal("death")
     
     
 func give_player_upgrades():
