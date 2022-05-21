@@ -87,7 +87,6 @@ func enter_phase_1():
 func enter_phase_2():
     if phase >= 2:
         return
-    print("phase 2")
     phase = 2
     velocity = Vector2(0, 0)
     speed = 200
@@ -97,7 +96,6 @@ func enter_phase_2():
 func enter_phase_3():
     if phase >= 3:
         return
-    print("phase 3")
     phase = 3
     velocity = Vector2(0, 0)
     speed = 300
@@ -111,7 +109,6 @@ func shoot(bullet_count = 1):
 
 
 func spawn_bullet(total = 1, i = 1):
-    print("bawlet")
     var bullet = SquidBullet.instance()
     
     owner.add_child(bullet)
@@ -195,6 +192,5 @@ func give_player_upgrades():
 
 
 func _on_PauseTimer_timeout():
-    print("unpaused")
     get_tree().paused = false
     queue_free()
