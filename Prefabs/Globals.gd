@@ -56,6 +56,7 @@ func load():
     #var current_scene = root.get_child(root.get_child_count() - 1)
     #current_scene.free()
     
+    # warning-ignore:return_value_discarded
     get_tree().change_scene(level_to_load)
     
     

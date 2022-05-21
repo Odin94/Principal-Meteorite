@@ -192,6 +192,7 @@ func die():
     $AnimatedSprite.play("death")
     $DeathSound.play()
     yield(get_tree().create_timer(5), "timeout")
+    # warning-ignore:return_value_discarded
     get_tree().change_scene("res://Levels/TitleScreen.tscn")
 
 
