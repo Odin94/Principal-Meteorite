@@ -45,9 +45,11 @@ trigger_distance = 800
 
 [node name="Crab" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1472, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Crab2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2792, -34 )
+scale = Vector2( 1, 1 )
 
 [node name="DamagingArea" parent="." instance=ExtResource( 7 )]
 position = Vector2( -32, -112 )
@@ -82,12 +84,15 @@ position = Vector2( -224, 52 )
 
 [node name="Crab3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -448, -278 )
+scale = Vector2( 1, 1 )
 
 [node name="Crab4" parent="." instance=ExtResource( 6 )]
 position = Vector2( -96, -278 )
+scale = Vector2( 1, 1 )
 
 [node name="Crab5" parent="." instance=ExtResource( 6 )]
 position = Vector2( -472, -688 )
+scale = Vector2( 1, 1 )
 
 [node name="HealthUpgrade_3" parent="." instance=ExtResource( 9 )]
 position = Vector2( -528, -688 )
