@@ -30,7 +30,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 186, 856 )
+position = Vector2( 1786, -347 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -44,30 +44,30 @@ position = Vector2( 512, 824 )
 position = Vector2( 864, 448 )
 
 [node name="Door-Lvl6-5" parent="." instance=ExtResource( 7 )]
-position = Vector2( 32, 880 )
+position = Vector2( 17, 880 )
 scale = Vector2( -1, 1.5 )
 next_level = "res://Levels/Level5.tscn"
 
 [node name="Door-Lvl6-7" parent="." instance=ExtResource( 7 )]
-position = Vector2( 427, -594 )
+position = Vector2( 402, -590 )
 rotation = 3.14159
 scale = Vector2( 1, -1.5 )
-next_level = "res://Levels/Level5.tscn"
+next_level = "res://Levels/Level7.tscn"
 
 [node name="Door-Lvl6-8" parent="." instance=ExtResource( 7 )]
-position = Vector2( 3295, -1109 )
+position = Vector2( 3344, -1104 )
 rotation = -3.14159
 scale = Vector2( -1, 1.5 )
 next_level = "res://Levels/Level5.tscn"
 
 [node name="Door-Lvl5-6-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 94, 870 )
+position = Vector2( 73, 857 )
 
 [node name="Door-Lvl7-6-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 480, -612 )
 
 [node name="Door-Lvl8-6-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 3243, -1132 )
+position = Vector2( 3291, -1125 )
 
 [node name="1DamagingArea" parent="." instance=ExtResource( 9 )]
 position = Vector2( 318, 95 )
