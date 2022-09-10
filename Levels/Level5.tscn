@@ -27,6 +27,7 @@ scale = Vector2( -1, 1.5 )
 
 [node name="Door-Lvl5-6" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1760, 112 )
+scale = Vector2( 1, 2 )
 next_level = "res://Levels/Level6.tscn"
 
 [node name="Door-Lvl1-5-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
