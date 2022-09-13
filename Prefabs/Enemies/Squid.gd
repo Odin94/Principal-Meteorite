@@ -53,12 +53,12 @@ func _physics_process(_delta):
 
 func float_up_down(floating_phase, float_velocity = 30, direction_change_timeout = 2):
 	velocity.y = float_velocity
-	yield(get_tree().create_timer(direction_change_timeout), "timeout")
+	$UpDownChangeTimer.start(direction_change_timeout); yield($UpDownChangeTimer, "timeout")
 	if phase == floating_phase:
 		float_up_down(floating_phase, -float_velocity, direction_change_timeout)
 
 func process_phase_0():
-	if position.distance_to(player.position) < trigger_distance:
+	if position.distance_to(player.position) < trigger_distance and phase < 1:
 		velocity = Vector2(0, 0)
 		$AnimatedSprite.play("_idle")
 		yield(get_tree().create_timer(2), "timeout")

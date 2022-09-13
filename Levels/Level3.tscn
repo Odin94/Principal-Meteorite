@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Prefabs/Enemies/Squid.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/JumpPad.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/Level3.gd" type="Script" id=8]
-[ext_resource path="res://Prefabs/Upgrades/HealthUpgrade.tscn" type="PackedScene" id=9]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 8 )
@@ -58,9 +57,6 @@ position = Vector2( 1216, 2072 )
 [node name="JumpPad" parent="." instance=ExtResource( 7 )]
 position = Vector2( 880, 2920 )
 scale = Vector2( 2, 2 )
-
-[node name="HealthUpgrade_6" parent="." instance=ExtResource( 9 )]
-position = Vector2( 2675, 11 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
 [connection signal="death" from="Squid" to="." method="_on_Squid_death"]
