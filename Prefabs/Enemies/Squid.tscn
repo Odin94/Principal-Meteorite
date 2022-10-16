@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Prefabs/Enemies/Squid.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/enemies/octopus/octopus-3.png" type="Texture" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-5.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-2.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-4.png" type="Texture" id=15]
+[ext_resource path="res://Audio/mixkit-aggressive-beast-roar-13.wav" type="AudioStream" id=16]
+[ext_resource path="res://Audio/laserShootSquid.wav" type="AudioStream" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 20.4667 )
@@ -118,6 +120,17 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScreamSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = -5.0
+max_distance = 200000.0
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+volume_db = -5.0
+pitch_scale = 0.82
+max_distance = 200000.0
 
 [connection signal="area_entered" from="DamageArea" to="." method="_on_DamageArea_area_entered"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]

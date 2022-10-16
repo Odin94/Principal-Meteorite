@@ -31,6 +31,6 @@
 * Living tissue platforms, enemy, bullet sprites: [Luis Zuno](https://www.patreon.com/ansimuz)
 * Font: Open Sans
 * Sounds:
-    * Jumping [mixkit.co](https://mixkit.co/free-sound-effects)
+    * Jumping, boss-1-scream [mixkit.co](https://mixkit.co/free-sound-effects)
     * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
     * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)

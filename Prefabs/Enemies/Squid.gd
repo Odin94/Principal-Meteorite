@@ -61,6 +61,7 @@ func process_phase_0():
 	if position.distance_to(player.position) < trigger_distance and phase < 1:
 		velocity = Vector2(0, 0)
 		$AnimatedSprite.play("_idle")
+		$ScreamSound.play()
 		yield(get_tree().create_timer(2), "timeout")
 		enter_phase_1()
 
@@ -90,6 +91,7 @@ func enter_phase_2():
 	phase = 2
 	velocity = Vector2(0, 0)
 	speed = 200
+	$ScreamSound.play()
 	float_up_down(phase, 60, 4)
 
 
@@ -99,6 +101,7 @@ func enter_phase_3():
 	phase = 3
 	velocity = Vector2(0, 0)
 	speed = 300
+	$ScreamSound.play()
 	float_up_down(phase, 100, 3)
 	
 
@@ -112,6 +115,7 @@ func spawn_bullet(total = 1, i = 1):
 	var bullet = SquidBullet.instance()
 	
 	owner.add_child(bullet)
+	$ShootSound.play()
 	bullet.transform = global_transform
 	
 	var bullet_offset = $AnimatedSprite.frames.get_frame("_idle", 0).get_width() * 0.9

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laserShootSquid.wav-339369bf53a5bf4b2132c76903b03a6c.sample"
+
+[deps]
+
+source_file="res://Audio/laserShootSquid.wav"
+dest_files=[ "res://.import/laserShootSquid.wav-339369bf53a5bf4b2132c76903b03a6c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
