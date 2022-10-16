@@ -57,4 +57,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="TileMap2" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 16
+collision_mask = 31
+format = 1
+tile_data = PoolIntArray( -655354, 18, 0, -655309, 18, 0, -458700, 18, 0, 262145, 18, 0, 262146, 18, 0, 262147, 18, 0, 262148, 18, 0, 262149, 18, 0, 262150, 18, 0, 262151, 18, 0, 1048575, 18, 0, 983040, 18, 0, 1310737, 18, 0, 1376273, 18, 0, 1441809, 18, 0, 1507345, 18, 0, 1572881, 18, 0, 1638417, 18, 0, 1703953, 18, 0, 1769489, 18, 0, 1835025, 18, 0, 1900561, 18, 0, 1966097, 18, 0, 2031633, 18, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

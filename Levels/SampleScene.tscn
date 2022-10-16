@@ -30,4 +30,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="TileMap2" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 16
+collision_mask = 31
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
