@@ -34,7 +34,7 @@ position = Vector2( -304, 32 )
 rotation = -3.14159
 scale = Vector2( 1, 2 )
 
-[node name="Door-Lvl2-3" parent="." instance=ExtResource( 3 )]
+[node name="Door-Lvl2-pre-boss-3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4272, -416 )
 scale = Vector2( 1, 2 )
 next_level = "res://Levels/Level3-Pre-Boss-Save.tscn"

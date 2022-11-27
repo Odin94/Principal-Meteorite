@@ -7,7 +7,7 @@
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=6]
 
-[node name="Level4" type="Node2D"]
+[node name="Level3-Pre-Boss-Save" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 2, 2 )
@@ -43,7 +43,7 @@ position = Vector2( 1072, 2192 )
 scale = Vector2( 1, 1.5 )
 next_level = "res://Levels/Level3.tscn"
 
-[node name="Door-Lvl2-3-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+[node name="Door-Lvl2-pre-boss-3-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 163, 2192 )
 
 [node name="Door-Lvl3-pre-boss-3-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
