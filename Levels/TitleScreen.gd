@@ -6,6 +6,7 @@ func _ready():
 
 
 func _on_Start_pressed():
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Levels/Level1.tscn")
 
 

@@ -19,7 +19,6 @@ func _ready():
 func save():
 	var save_game = File.new()
 	save_game.open(save_path, File.WRITE)
-	var root = get_tree().get_root()
 	
 	var save_data = {
 		"collected_health_powerups": collected_health_powerups,

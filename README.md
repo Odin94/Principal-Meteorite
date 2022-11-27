@@ -11,6 +11,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 ## Setup
 * Open with Godot game engine (tested with v3.4 on Windows)
 
+
 ## Development
 * When adding new enemies:
     * Make sure to set collision layer and mask
@@ -23,6 +24,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
     * Configure doors to link to the right next scene
     * Name doors / spawn points such that they will be matched (See Door.gd/Globals.gd/Player.gd _ready function) 
 
+* When adding upgrades: Make sure to give them a unique name since save/load tracks them with it
 
 ## Planned features
 * Quick intro when starting a new game

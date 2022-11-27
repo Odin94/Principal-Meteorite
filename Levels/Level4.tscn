@@ -37,9 +37,10 @@ drag_margin_v_enabled = true
 position = Vector2( 112, 2192 )
 scale = Vector2( -1, 1.5 )
 
-[node name="Door-Lvl4-2" parent="." instance=ExtResource( 5 )]
+[node name="Door-Lvl4-challenge" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1072, 2192 )
 scale = Vector2( 1, 1.5 )
+next_level = "res://Levels/Level4_challenge.tscn"
 
 [node name="Door-Lvl1-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 168, 2176 )
