@@ -36,6 +36,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 16
 collision_mask = 31
 format = 1
+tile_data = PoolIntArray( 65570, 18, 0, 327715, 18, 0, 524324, 18, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -98,12 +99,15 @@ scale = Vector2( 17, 6 )
 
 [node name="Crab" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1435, 488 )
+scale = Vector2( 1, 1 )
 
 [node name="Crab2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1973, 865 )
+scale = Vector2( 1, 1 )
 
 [node name="Crab3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 2136, 867 )
+scale = Vector2( 1, 1 )
 
 [node name="Jumper" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2641, 7 )
