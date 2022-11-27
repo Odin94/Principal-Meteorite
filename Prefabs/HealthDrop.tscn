@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/home-grown/health_upgrade.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/home-grown/Health_Upgrade.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/HealthDrop.gd" type="Script" id=2]
 [ext_resource path="res://Audio/pick_up_health.wav" type="AudioStream" id=3]
 

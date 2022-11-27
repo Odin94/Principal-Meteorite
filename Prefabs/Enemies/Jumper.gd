@@ -48,6 +48,7 @@ func jump():
 		direction = x_pos_delta / abs_pos_delta
 		
 		if position.distance_to(player.position) < 180:
+			#warning-ignore:integer_division
 			velocity.y = jump_force / 2
 		else:
 			velocity.y = jump_force
