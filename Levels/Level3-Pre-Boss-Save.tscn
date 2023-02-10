@@ -41,7 +41,7 @@ next_level = "res://Levels/Level2.tscn"
 [node name="Door-Lvl3-pre-boss-3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1072, 2192 )
 scale = Vector2( 1, 1.5 )
-next_level = "res://Levels/Level3.tscn"
+next_level = "res://Levels/Level3_squidboss.tscn"
 
 [node name="Door-Lvl2-pre-boss-3-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 163, 2192 )
