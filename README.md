@@ -31,16 +31,17 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 * 2nd boss fight
 * Quick end screen
 * More levels
+* Run-back-to-start-on-self-destruct-timer ending event
 * Add missing audio
     * Boss sounds
     * Background music
     * Enemy sounds
     * Better walking sound?
 
-
 ## Credits
 * Player sprite: [ronny14](https://www.youtube.com/user/pizzaguy14)
-* Living tissue platforms, enemy, bullet sprites: [Luis Zuno](https://www.patreon.com/ansimuz)
+* Living tissue platforms, squid+crab+jumper enemy, bullet sprites: [Luis Zuno](https://www.patreon.com/ansimuz)
+* Virus boss & bullets: [Kuuly](https://kuuly.itch.io)
 * Font: Open Sans
 * Sounds:
     * Jumping, boss-1-scream [mixkit.co](https://mixkit.co/free-sound-effects)
