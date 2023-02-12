@@ -9,7 +9,7 @@
 [node name="Level10-Virus-Boss" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1142, 1282 )
+position = Vector2( 810, 991 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -46,6 +46,6 @@ __meta__ = {
 }
 
 [node name="Virus" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1195, 879 )
+position = Vector2( 1200, 880 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]

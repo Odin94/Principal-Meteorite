@@ -103,7 +103,7 @@ func enter_phase_3():
 	speed = 300
 	$ScreamSound.play()
 	float_up_down(phase, 100, 3)
-	
+
 
 func shoot(bullet_count = 1):
 	if $ShootingCooldown.is_stopped():
