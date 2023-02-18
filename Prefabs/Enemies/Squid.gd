@@ -148,7 +148,7 @@ func _on_DamageArea_body_entered(body: Node2D):
 
 
 func _on_DamageArea_area_entered(area: Area2D):
-	if phase == 0:
+	if phase == 0 or health <= 0:
 	   return
 	 
 	if area.name.validate_node_name().begins_with("Bullet"):

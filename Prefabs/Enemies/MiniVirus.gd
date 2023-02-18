@@ -43,7 +43,7 @@ func _on_DamageArea_body_entered(body):
 
 
 func _on_DamageArea_area_entered(area):
-	if not fully_spawned:
+	if not fully_spawned or dead:
 		return
 
 	if area.name.validate_node_name().begins_with("Bullet"):
