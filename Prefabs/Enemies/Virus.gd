@@ -14,12 +14,16 @@ export var damage = 25
 const phase_1_health_cutoff = 390
 const phase_2_health_cutoff = 125
 
+var phase_2_all_minis_spawned = false
+
 var bullet_lifespan = 1
 
 var phase = 0
 
 var stop_floating = false
 onready var rng = RandomNumberGenerator.new()
+
+onready var phase_3_shaker = Shaker.new(100.0, 15.0, 0)
 
 var mini_viruses = []
 
@@ -45,7 +49,7 @@ func _ready():
 	float_up_down(0)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if health <= 0:
 		return
 		
@@ -54,15 +58,20 @@ func _physics_process(delta):
 	elif phase == 2:
 		process_phase_2()
 	elif phase == 3:
-		process_phase_3()
+		process_phase_3(delta)
 	
 	if move_to:
-		print(position)
 		position = position.move_toward(move_to, delta * speed)
 		if position.distance_to(move_to) == 0:
 			move_to = null
 	else:
 		global_position += velocity * delta
+	
+	if $AnimatedSprite.animation == "Closing_eye":
+		set_modulate(lerp(get_modulate(), Color(0.5, 0.5, 0.5, 1), 1 * delta))
+	elif $AnimatedSprite.animation == "Opening_eye":
+		set_modulate(lerp(get_modulate(), Color(1, 1, 1, 1), 1 * delta))
+
 
 func float_up_down(floating_phase, float_velocity = 10, direction_change_timeout = 1.5):
 	if stop_floating:
@@ -75,6 +84,7 @@ func float_up_down(floating_phase, float_velocity = 10, direction_change_timeout
 
 	if phase == floating_phase:
 		float_up_down(floating_phase, -float_velocity, direction_change_timeout)
+
 
 func process_phase_1():
 	var phase_one_y_positions = [880, 1200, 1400]
@@ -93,17 +103,23 @@ func process_phase_2():
 		if is_instance_valid(mini):
 			all_minis_dead = false
 	
-	if all_minis_dead:
+	if phase_2_all_minis_spawned and all_minis_dead:
 		enter_phase_3()
 	
 	
-func process_phase_3():
+func process_phase_3(delta: float):
+	# Shake, but stay in the center
+	var shake_offset = phase_3_shaker.get_shake_offset(delta)
+	self.position += shake_offset
+	self.position = position.move_toward(Vector2(1200, 880), delta * 200)
+	
 	pass
 	
 
 func enter_phase_1():
-	if phase >= 1 or $AnimatedSprite.animation == "Opening_eye":
+	if phase >= 1 or $AnimatedSprite.animation != "Closed_eye":
 		return
+	
 	$AnimatedSprite.play("Opening_eye")
 	yield($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.play("default")
@@ -147,8 +163,19 @@ func enter_phase_2():
 		mini_virus.position = position
 		mini_viruses.append(mini_virus)
 		yield(get_tree().create_timer(rng.randf_range(0.4, 0.8)), "timeout")
-	# Automatically move to next phase after 30s even if not all minis are killed
-	yield(get_tree().create_timer(30), "timeout")
+		
+	yield(get_tree().create_timer(10), "timeout")	
+	positions.shuffle()
+	for position in positions:
+		var mini_virus = MiniVirus.instance()
+		owner.add_child(mini_virus)
+		mini_virus.position = position
+		mini_viruses.append(mini_virus)
+		yield(get_tree().create_timer(rng.randf_range(1, 2)), "timeout")
+	phase_2_all_minis_spawned = true
+	# Automatically move to next phase after some time even if not all minis are killed
+	# TODO: This could break enter_phase_3 (double stuff) if unfortunately timed maybe
+	yield(get_tree().create_timer(90), "timeout")
 	if phase == 2:
 		enter_phase_3()
 
@@ -157,10 +184,27 @@ func enter_phase_3():
 	if phase >= 3:
 		return
 	phase = 3
+	
+	$AnimatedSprite.play("Opening_eye")
+	yield($AnimatedSprite, "animation_finished")
+	$AnimatedSprite.play("default")
 
+
+func enter_phase_4():
+	if phase >= 4:
+		return
+	phase = 4
+	
+	move_to = Vector2(1200, 880)
+	velocity = Vector2(0, 0)
+	# Wait to move to center
+	yield(get_tree().create_timer(1.5), "timeout")
+	$AnimatedSprite.play("Closing_eye")
+	yield($AnimatedSprite, "animation_finished")
+	
 
 func _on_DamageArea_body_entered(body):
-	if health <= 0 or phase == 0 or phase == 2:
+	if health <= 0 or phase in [0]:
 		return
 
 	if body.name == "Player":
@@ -171,9 +215,12 @@ func _on_DamageArea_area_entered(area):
 	if area.name.validate_node_name().begins_with("Bullet"):
 		if phase == 0:
 		   enter_phase_1()
+		   area.hit_enemy()
+		elif phase in [0, 2]:
+			return
 		else:
 			get_hurt(area.damage)
-		area.hit_enemy()
+			area.hit_enemy()
 
 
 func _on_HitEffectTimeout_timeout():
