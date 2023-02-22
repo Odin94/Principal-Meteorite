@@ -1,6 +1,7 @@
 extends Area2D
 
 export (PackedScene) var MiniVirus
+export (PackedScene) var Giardia
 
 var velocity := Vector2(0, 0)
 var speed = 500
@@ -10,6 +11,7 @@ var move_to = null
 export var direction = -1
 export var health = 400
 export var damage = 25
+export var center = Vector2(1200, 880)
 
 const phase_1_health_cutoff = 390
 const phase_2_health_cutoff = 125
@@ -24,8 +26,22 @@ var stop_floating = false
 onready var rng = RandomNumberGenerator.new()
 
 onready var phase_3_shaker = Shaker.new(100.0, 15.0, 0)
+var should_keep_spawning_giardia = false
+var giardia_spawn_delay = 0.075
 
 var mini_viruses = []
+var mini_virus_positions = [
+	Vector2(625, 750),
+	Vector2(1000, 700),
+	Vector2(1500, 800),
+	Vector2(750, 1400),
+	Vector2(1200, 1125),
+	Vector2(1550, 900),
+	Vector2(1650, 1350),
+	Vector2(900, 1250),
+	Vector2(1000, 1000),
+]
+
 
 # Pre-Boss room: Have some small virus dudes scatter away on the side
 
@@ -42,6 +58,7 @@ var mini_viruses = []
 
 
 func _ready():
+	randomize()
 	rng.randomize()
 	if direction == 1:
 		$AnimatedSprite.flip_h = true
@@ -111,10 +128,9 @@ func process_phase_3(delta: float):
 	# Shake, but stay in the center
 	var shake_offset = phase_3_shaker.get_shake_offset(delta)
 	self.position += shake_offset
-	self.position = position.move_toward(Vector2(1200, 880), delta * 200)
+	self.position = position.move_toward(center, delta * 200)
 	
-	pass
-	
+
 
 func enter_phase_1():
 	if phase >= 1 or $AnimatedSprite.animation != "Closed_eye":
@@ -137,7 +153,7 @@ func enter_phase_2():
 		return
 	phase = 2
 
-	move_to = Vector2(1200, 880)
+	move_to = center
 	velocity = Vector2(0, 0)
 	# Wait to move to center
 	yield(get_tree().create_timer(1.5), "timeout")
@@ -145,19 +161,9 @@ func enter_phase_2():
 	yield($AnimatedSprite, "animation_finished")
 
 	randomize()
-	var positions = [
-		Vector2(625, 750),
-		Vector2(1000, 700),
-		Vector2(1500, 800),
-		Vector2(750, 1400),
-		Vector2(1200, 1125),
-		Vector2(1550, 900),
-		Vector2(1650, 1350),
-		Vector2(900, 1250),
-		Vector2(1000, 1000),
-	]
-	positions.shuffle()
-	for position in positions:
+
+	mini_virus_positions.shuffle()
+	for position in mini_virus_positions:
 		var mini_virus = MiniVirus.instance()
 		owner.add_child(mini_virus)
 		mini_virus.position = position
@@ -165,8 +171,8 @@ func enter_phase_2():
 		yield(get_tree().create_timer(rng.randf_range(0.4, 0.8)), "timeout")
 		
 	yield(get_tree().create_timer(10), "timeout")	
-	positions.shuffle()
-	for position in positions:
+	mini_virus_positions.shuffle()
+	for position in mini_virus_positions:
 		var mini_virus = MiniVirus.instance()
 		owner.add_child(mini_virus)
 		mini_virus.position = position
@@ -179,7 +185,7 @@ func enter_phase_2():
 	if phase == 2:
 		enter_phase_3()
 
-
+# TODO: Make invul during phase 3 or no?
 func enter_phase_3():
 	if phase >= 3:
 		return
@@ -188,6 +194,13 @@ func enter_phase_3():
 	$AnimatedSprite.play("Opening_eye")
 	yield($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.play("default")
+	
+	should_keep_spawning_giardia = true
+	spawn_giardia()
+	
+	yield(get_tree().create_timer(20), "timeout")
+	should_keep_spawning_giardia = false
+	enter_phase_4()
 
 
 func enter_phase_4():
@@ -195,16 +208,39 @@ func enter_phase_4():
 		return
 	phase = 4
 	
-	move_to = Vector2(1200, 880)
+	move_to = center
 	velocity = Vector2(0, 0)
 	# Wait to move to center
 	yield(get_tree().create_timer(1.5), "timeout")
 	$AnimatedSprite.play("Closing_eye")
 	yield($AnimatedSprite, "animation_finished")
 	
+	# start moving; alternate phase1 pattern and just floating/bouncing around
+	
+	# start spawning adds
+	
+	# start spawning giardia again
+	giardia_spawn_delay = 0.2
+	should_keep_spawning_giardia = true
+	spawn_giardia()
+	
+
+func spawn_giardia():
+	var spawn_y = 200
+	# random between 400 and 1600
+	var spawn_x = randi() % 1201 + 400
+	
+	var giardia = Giardia.instance()
+	owner.add_child(giardia)
+	giardia.position = Vector2(spawn_x, spawn_y)
+	yield(get_tree().create_timer(giardia_spawn_delay), "timeout")
+	
+	if should_keep_spawning_giardia:
+		spawn_giardia()
+
 
 func _on_DamageArea_body_entered(body):
-	if health <= 0 or phase in [0]:
+	if health <= 0 or phase in [0, 2]:
 		return
 
 	if body.name == "Player":

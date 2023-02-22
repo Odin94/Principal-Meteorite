@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Enemies/Virus.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Enemies/Attacks/Giardia.tscn" type="PackedScene" id=6]
 
 [node name="Level10-Virus-Boss" type="Node2D"]
 
@@ -47,5 +48,6 @@ __meta__ = {
 
 [node name="Virus" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1200, 880 )
+Giardia = ExtResource( 6 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
