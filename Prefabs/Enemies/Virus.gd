@@ -158,28 +158,26 @@ func enter_phase_2():
 
 	randomize()
 
-	mini_virus_positions.shuffle()
-	for position in mini_virus_positions:
-		var mini_virus = MiniVirus.instance()
-		owner.add_child(mini_virus)
-		mini_virus.position = position
-		mini_viruses.append(mini_virus)
-		yield(get_tree().create_timer(rng.randf_range(0.4, 0.8)), "timeout")
-		
-	yield(get_tree().create_timer(10), "timeout")	
-	mini_virus_positions.shuffle()
-	for position in mini_virus_positions:
-		var mini_virus = MiniVirus.instance()
-		owner.add_child(mini_virus)
-		mini_virus.position = position
-		mini_viruses.append(mini_virus)
-		yield(get_tree().create_timer(rng.randf_range(1, 2)), "timeout")
+	spawn_minis(0.4, 0.8)
+
+	yield(get_tree().create_timer(10), "timeout")
+	spawn_minis(1, 2)
 	phase_2_all_minis_spawned = true
 	# Automatically move to next phase after some time even if not all minis are killed
 	# TODO: This could break enter_phase_3 (double stuff) if unfortunately timed maybe
 	yield(get_tree().create_timer(90), "timeout")
 	if phase == 2:
 		enter_phase_3()
+
+
+func spawn_minis(min_time: float, max_time: float):
+	mini_virus_positions.shuffle()
+	for position in mini_virus_positions:
+		var mini_virus = MiniVirus.instance()
+		owner.add_child(mini_virus)
+		mini_virus.position = position
+		mini_viruses.append(mini_virus)
+		yield(get_tree().create_timer(rng.randf_range(min_time, max_time)), "timeout")
 
 
 func process_phase_2():
@@ -192,7 +190,6 @@ func process_phase_2():
 		enter_phase_3()
 
 
-# TODO: Make invul during phase 3 or no?
 func enter_phase_3():
 	if phase >= 3:
 		return
@@ -206,8 +203,7 @@ func enter_phase_3():
 	should_keep_spawning_giardia = true
 	spawn_giardia()
 	
-	#yield(get_tree().create_timer(20), "timeout")
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(20), "timeout")
 	should_keep_spawning_giardia = false
 	enter_phase_4()
 
@@ -231,12 +227,14 @@ func enter_phase_4():
 	$AnimatedSprite.play("Closing_eye")
 	yield($AnimatedSprite, "animation_finished")
 	
-	# start spawning adds
-	
 	# start spawning giardia again
 	giardia_spawn_delay = 0.6
 	should_keep_spawning_giardia = true
 	spawn_giardia()
+	
+	# start spawning adds	
+	spawn_minis(5, 10)
+	spawn_minis(5, 10)
 
 
 func process_phase_4(delta: float):
@@ -293,7 +291,7 @@ func _on_DamageArea_area_entered(area):
 		if phase == 0:
 		   enter_phase_1()
 		   area.hit_enemy()
-		elif phase in [0, 2]:
+		elif phase in [0, 2, 3]:
 			return
 		else:
 			get_hurt(area.damage)
