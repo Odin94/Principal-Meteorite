@@ -5,7 +5,7 @@ export var speed := 5
 export var direction := Vector2(0, 1)
 
 
-var current_lifetime := 0
+var current_lifetime := 0.0
 var damage := 20
 var velocity := Vector2(0, 0)
 

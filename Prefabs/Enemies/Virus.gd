@@ -37,6 +37,10 @@ var phase_4_positions := [
 	Vector2(1600, 1000),
 	Vector2(810, 1300),
 ]
+var p4_is_left_right_bouncing := false
+var p4_left_right_bouncing_index := 0
+var p4_y_positions := [1400, 1200, 880]
+
 
 var mini_viruses = []
 var mini_virus_positions := [
@@ -114,45 +118,6 @@ func float_up_down(floating_phase, float_velocity = 10, direction_change_timeout
 		float_up_down(floating_phase, -float_velocity, direction_change_timeout)
 
 
-func process_phase_1():
-	var phase_one_y_positions = [880, 1200, 1400]
-	
-	if velocity.x > 0 and position.x > 2600:
-		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
-		velocity.x *= -1
-	elif velocity.x < 0 and position.x < -200:
-		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
-		velocity.x *= -1
-
-
-func process_phase_2():
-	var all_minis_dead = true
-	for mini in mini_viruses:
-		if is_instance_valid(mini):
-			all_minis_dead = false
-	
-	if true:#phase_2_all_minis_spawned and all_minis_dead:  # TODO
-		enter_phase_3()
-	
-	
-func process_phase_3(delta: float):
-	# Shake, but stay in the center
-	var shake_offset = phase_3_shaker.get_shake_offset(delta)
-	self.position += shake_offset
-	self.position = position.move_toward(center, delta * 200)
-	
-
-func process_phase_4(delta: float):
-	var p4_move_to = phase_4_positions[p4_pos_i]
-	self.position = position.move_toward(p4_move_to, delta * 200)
-	if abs(position.distance_to(p4_move_to)) < 50:
-		var shake_offset = phase_4_shaker.get_shake_offset(delta)
-		self.position += shake_offset
-		self.position = position.move_toward(center, delta * 200)
-		if $Phase4VibrateTimer.is_stopped():
-			$Phase4VibrateTimer.start()
-
-
 func enter_phase_1():
 	if phase >= 1 or $AnimatedSprite.animation != "Closed_eye":
 		return
@@ -168,6 +133,16 @@ func enter_phase_1():
 	phase = 1
 	velocity = Vector2(1000, 0)
 
+
+func process_phase_1():
+	var phase_one_y_positions = [880, 1200, 1400]
+	
+	if velocity.x > 0 and position.x > 2600:
+		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
+		velocity.x *= -1
+	elif velocity.x < 0 and position.x < -200:
+		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
+		velocity.x *= -1
 
 func enter_phase_2():
 	if phase >= 2:
@@ -206,6 +181,17 @@ func enter_phase_2():
 	if phase == 2:
 		enter_phase_3()
 
+
+func process_phase_2():
+	var all_minis_dead = true
+	for mini in mini_viruses:
+		if is_instance_valid(mini):
+			all_minis_dead = false
+	
+	if phase_2_all_minis_spawned and all_minis_dead:
+		enter_phase_3()
+
+
 # TODO: Make invul during phase 3 or no?
 func enter_phase_3():
 	if phase >= 3:
@@ -222,9 +208,15 @@ func enter_phase_3():
 	
 	#yield(get_tree().create_timer(20), "timeout")
 	yield(get_tree().create_timer(1), "timeout")
-	print("entering pahse 4")
 	should_keep_spawning_giardia = false
 	enter_phase_4()
+
+
+func process_phase_3(delta: float):
+	# Shake, but stay in the center
+	var shake_offset = phase_3_shaker.get_shake_offset(delta)
+	self.position += shake_offset
+	self.position = position.move_toward(center, delta * 200)
 
 
 func enter_phase_4():
@@ -239,16 +231,40 @@ func enter_phase_4():
 	$AnimatedSprite.play("Closing_eye")
 	yield($AnimatedSprite, "animation_finished")
 	
-	# start moving; alternate phase1 pattern and just floating/bouncing around
-	
 	# start spawning adds
 	
 	# start spawning giardia again
-	giardia_spawn_delay = 0.2
+	giardia_spawn_delay = 0.6
 	should_keep_spawning_giardia = true
-	print("spawning again")
 	spawn_giardia()
-	
+
+
+func process_phase_4(delta: float):
+	if p4_is_left_right_bouncing:
+		if p4_left_right_bouncing_index == p4_y_positions.size():
+			p4_is_left_right_bouncing = false
+			velocity = Vector2(0, 0)
+
+		if velocity.x > 0 and position.x > 2600:
+			position.y = p4_y_positions[p4_left_right_bouncing_index]
+			velocity.x *= -1
+			p4_left_right_bouncing_index += 1
+		elif velocity.x < 0 and position.x < -200:
+			position.y = p4_y_positions[p4_left_right_bouncing_index]
+			velocity.x *= -1
+			p4_left_right_bouncing_index += 1
+	else:
+		var p4_move_to = phase_4_positions[p4_pos_i]
+		print("moving to", p4_move_to)
+		print(position)
+		self.position = position.move_toward(p4_move_to, delta * 2000)
+		if abs(position.distance_to(p4_move_to)) < 50:
+			var shake_offset = phase_4_shaker.get_shake_offset(delta)
+			self.position += shake_offset
+			self.position = position.move_toward(center, delta * 200)
+			if $Phase4VibrateTimer.is_stopped():
+				$Phase4VibrateTimer.start()
+
 
 func spawn_giardia():
 	var spawn_y = 200
@@ -314,8 +330,11 @@ func die():
 func _on_Phase4VibrateTimer_timeout():
 	p4_pos_i += 1
 	if p4_pos_i >= phase_4_positions.size():
-		# TODO add boolean flag that triggers phase-1-like movement twice in process_phase_4
 		p4_pos_i = p4_pos_i % phase_4_positions.size()
+		# Run off the screen and start bouncing left-right
+		p4_is_left_right_bouncing = true
+		p4_left_right_bouncing_index = 0
+		velocity = Vector2(1000, 0)
 
 
 
