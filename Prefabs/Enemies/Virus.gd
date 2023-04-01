@@ -13,7 +13,7 @@ export var health := 400
 export var damage := 25
 export var center := Vector2(1200, 880)
 
-const phase_1_health_cutoff := 390
+const phase_1_health_cutoff := 220
 const phase_2_health_cutoff := 125
 
 var phase_2_all_minis_spawned := false
@@ -131,18 +131,24 @@ func enter_phase_1():
 	velocity = Vector2(0, -1000)
 	yield(get_tree().create_timer(.5), "timeout")
 	phase = 1
-	velocity = Vector2(1000, 0)
+	velocity = Vector2(1200, 0)
 
 
+var p1_position_i = 0
 func process_phase_1():
-	var phase_one_y_positions = [880, 1200, 1400]
+	var phase_one_y_positions := [880, 1200, 1400]
 	
 	if velocity.x > 0 and position.x > 2600:
-		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
+		position.y = phase_one_y_positions[p1_position_i]
 		velocity.x *= -1
+		p1_position_i += 1
+		p1_position_i %= phase_one_y_positions.size()
 	elif velocity.x < 0 and position.x < -200:
-		position.y = phase_one_y_positions[randi() % phase_one_y_positions.size()]
+		position.y = phase_one_y_positions[p1_position_i]
 		velocity.x *= -1
+		p1_position_i += 1
+		p1_position_i %= phase_one_y_positions.size()
+
 
 func enter_phase_2():
 	if phase >= 2:
