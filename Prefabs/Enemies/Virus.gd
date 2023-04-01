@@ -4,33 +4,42 @@ export (PackedScene) var MiniVirus
 export (PackedScene) var Giardia
 
 var velocity := Vector2(0, 0)
-var speed = 500
+var speed := 500
 
 var move_to = null
 
-export var direction = -1
-export var health = 400
-export var damage = 25
-export var center = Vector2(1200, 880)
+export var direction := -1
+export var health := 400
+export var damage := 25
+export var center := Vector2(1200, 880)
 
-const phase_1_health_cutoff = 390
-const phase_2_health_cutoff = 125
+const phase_1_health_cutoff := 390
+const phase_2_health_cutoff := 125
 
-var phase_2_all_minis_spawned = false
+var phase_2_all_minis_spawned := false
 
-var bullet_lifespan = 1
+var bullet_lifespan := 1
 
-var phase = 0
+var phase := 0
 
-var stop_floating = false
-onready var rng = RandomNumberGenerator.new()
+var stop_floating := false
+onready var rng := RandomNumberGenerator.new()
 
-onready var phase_3_shaker = Shaker.new(100.0, 15.0, 0)
-var should_keep_spawning_giardia = false
-var giardia_spawn_delay = 0.075
+onready var phase_3_shaker := Shaker.new(100.0, 15.0, 0)
+onready var phase_4_shaker := Shaker.new(100.0, 15.0, 0)
+var should_keep_spawning_giardia := false
+var giardia_spawn_delay := 0.075
+
+var p4_pos_i := 0
+var phase_4_positions := [
+	Vector2(810, 1000),
+	Vector2(1600, 1300),
+	Vector2(1600, 1000),
+	Vector2(810, 1300),
+]
 
 var mini_viruses = []
-var mini_virus_positions = [
+var mini_virus_positions := [
 	Vector2(625, 750),
 	Vector2(1000, 700),
 	Vector2(1500, 800),
@@ -76,6 +85,8 @@ func _physics_process(delta: float):
 		process_phase_2()
 	elif phase == 3:
 		process_phase_3(delta)
+	elif phase == 4:
+		process_phase_4(delta)
 	
 	if move_to:
 		position = position.move_toward(move_to, delta * speed)
@@ -120,7 +131,7 @@ func process_phase_2():
 		if is_instance_valid(mini):
 			all_minis_dead = false
 	
-	if phase_2_all_minis_spawned and all_minis_dead:
+	if true:#phase_2_all_minis_spawned and all_minis_dead:  # TODO
 		enter_phase_3()
 	
 	
@@ -130,6 +141,16 @@ func process_phase_3(delta: float):
 	self.position += shake_offset
 	self.position = position.move_toward(center, delta * 200)
 	
+
+func process_phase_4(delta: float):
+	var p4_move_to = phase_4_positions[p4_pos_i]
+	self.position = position.move_toward(p4_move_to, delta * 200)
+	if abs(position.distance_to(p4_move_to)) < 50:
+		var shake_offset = phase_4_shaker.get_shake_offset(delta)
+		self.position += shake_offset
+		self.position = position.move_toward(center, delta * 200)
+		if $Phase4VibrateTimer.is_stopped():
+			$Phase4VibrateTimer.start()
 
 
 func enter_phase_1():
@@ -195,10 +216,13 @@ func enter_phase_3():
 	yield($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.play("default")
 	
+	giardia_spawn_delay = 0.075
 	should_keep_spawning_giardia = true
 	spawn_giardia()
 	
-	yield(get_tree().create_timer(20), "timeout")
+	#yield(get_tree().create_timer(20), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
+	print("entering pahse 4")
 	should_keep_spawning_giardia = false
 	enter_phase_4()
 
@@ -222,6 +246,7 @@ func enter_phase_4():
 	# start spawning giardia again
 	giardia_spawn_delay = 0.2
 	should_keep_spawning_giardia = true
+	print("spawning again")
 	spawn_giardia()
 	
 
@@ -285,6 +310,12 @@ func die():
 	yield($AnimatedSprite, "animation_finished")
 	emit_signal("death")
 
+
+func _on_Phase4VibrateTimer_timeout():
+	p4_pos_i += 1
+	if p4_pos_i >= phase_4_positions.size():
+		# TODO add boolean flag that triggers phase-1-like movement twice in process_phase_4
+		p4_pos_i = p4_pos_i % phase_4_positions.size()
 
 
 

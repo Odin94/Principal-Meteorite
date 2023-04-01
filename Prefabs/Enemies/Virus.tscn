@@ -77,6 +77,10 @@ shape = SubResource( 3 )
 wait_time = 0.214
 one_shot = true
 
+[node name="Phase4VibrateTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
 volume_db = -5.0
@@ -90,4 +94,5 @@ one_shot = true
 
 [connection signal="area_entered" from="DamageArea" to="." method="_on_DamageArea_area_entered"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="Phase4VibrateTimer" to="." method="_on_Phase4VibrateTimer_timeout"]
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_HitEffectTimeout_timeout"]
