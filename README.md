@@ -34,7 +34,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 * Run-back-to-start-on-self-destruct-timer ending event
 * Add missing audio
     * Boss sounds
-    * Background music
+    * Boss Background music
     * Enemy sounds
     * Better walking sound?
 

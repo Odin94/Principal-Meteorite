@@ -91,13 +91,13 @@ scale = Vector2( 1, 2 )
 next_level = "res://Levels/Level2.tscn"
 
 [node name="Door-Lvl4-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 1921, 144 )
+position = Vector2( 1918, 154 )
 
 [node name="Door-Lvl2-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 1921, 664 )
 
 [node name="Door-Lvl5-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 1976, -500 )
+position = Vector2( 1976, -494 )
 
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 

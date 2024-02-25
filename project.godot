@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Prefabs/Scripts/Globals.gd"
+BackgroundMusicScene="*res://Levels/BackgroundMusicScene.tscn"
 
 [display]
 

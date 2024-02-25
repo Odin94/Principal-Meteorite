@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Audio/PrincipalMeteorite.wav" type="AudioStream" id=1]
+
+[node name="BackgroundMusicScene" type="Node2D"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
