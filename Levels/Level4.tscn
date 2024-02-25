@@ -43,7 +43,10 @@ scale = Vector2( 1, 1.5 )
 next_level = "res://Levels/Level4_challenge.tscn"
 
 [node name="Door-Lvl1-1-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 168, 2176 )
+position = Vector2( 166, 2201 )
+
+[node name="Door-Lvl4-challenge-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 989, 2196 )
 
 [node name="Saver" parent="." instance=ExtResource( 7 )]
 position = Vector2( 624, 2224 )
