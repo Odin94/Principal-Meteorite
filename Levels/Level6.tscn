@@ -70,7 +70,7 @@ next_level = "res://Levels/Level7.tscn"
 position = Vector2( 3344, -1104 )
 rotation = -3.14159
 scale = Vector2( -1, 1.5 )
-next_level = "res://Levels/Level5.tscn"
+next_level = "res://Levels/Level8-Pre-Boss-Save.tscn"
 
 [node name="Door-Lvl5-6-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 73, 857 )

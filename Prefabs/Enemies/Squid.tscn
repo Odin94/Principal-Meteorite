@@ -123,7 +123,7 @@ __meta__ = {
 
 [node name="ScreamSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
-volume_db = -5.0
+volume_db = 10.0
 max_distance = 200000.0
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
