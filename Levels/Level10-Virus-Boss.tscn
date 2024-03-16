@@ -58,3 +58,4 @@ position = Vector2( 527, 1241 )
 z_index = -3
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
+[connection signal="death" from="Virus" to="." method="_on_Virus_death"]

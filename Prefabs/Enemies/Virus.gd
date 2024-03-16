@@ -1,14 +1,16 @@
 extends Area2D
 
-export (PackedScene) var MiniVirus
-export (PackedScene) var Giardia
+export(PackedScene) var MiniVirus
+export(PackedScene) var Giardia
+
+signal death
 
 var velocity := Vector2(0, 0)
 var speed := 500
 
 var move_to = null
 
-export var direction := -1
+export var direction := - 1
 export var health := 400
 export var damage := 25
 export var center := Vector2(1200, 880)
@@ -41,7 +43,6 @@ var p4_is_left_right_bouncing := false
 var p4_left_right_bouncing_index := 0
 var p4_y_positions := [1400, 1200, 880]
 
-
 var mini_viruses = []
 var mini_virus_positions := [
 	Vector2(625, 750),
@@ -54,7 +55,6 @@ var mini_virus_positions := [
 	Vector2(900, 1250),
 	Vector2(1000, 1000),
 ]
-
 
 # Pre-Boss room: Have some small virus dudes scatter away on the side
 
@@ -69,7 +69,6 @@ var mini_virus_positions := [
 
 # After boss dies, shake screen & start self-destruct timer
 
-
 func _ready():
 	randomize()
 	rng.randomize()
@@ -77,7 +76,6 @@ func _ready():
 		$AnimatedSprite.flip_h = true
 	$AnimatedSprite.play("Closed_eye")
 	float_up_down(0)
-
 
 func _physics_process(delta: float):
 	if health <= 0:
@@ -104,35 +102,32 @@ func _physics_process(delta: float):
 	elif $AnimatedSprite.animation == "Opening_eye":
 		set_modulate(lerp(get_modulate(), Color(1, 1, 1, 1), 1 * delta))
 
-
-func float_up_down(floating_phase, float_velocity = 10, direction_change_timeout = 1.5):
+func float_up_down(floating_phase, float_velocity=10, direction_change_timeout=1.5):
 	if stop_floating:
 		velocity.y = 0
 		stop_floating = false
 		return
 
 	velocity.y = float_velocity
-	$UpDownChangeTimer.start(direction_change_timeout); yield($UpDownChangeTimer, "timeout")
+	$UpDownChangeTimer.start(direction_change_timeout); yield ($UpDownChangeTimer, "timeout")
 
 	if phase == floating_phase:
 		float_up_down(floating_phase, -float_velocity, direction_change_timeout)
-
 
 func enter_phase_1():
 	if phase >= 1 or $AnimatedSprite.animation != "Closed_eye":
 		return
 	
 	$AnimatedSprite.play("Opening_eye")
-	yield($AnimatedSprite, "animation_finished")
+	yield ($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.play("default")
 	velocity.y = 0
 	stop_floating = true
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield (get_tree().create_timer(1.5), "timeout")
 	velocity = Vector2(0, -1000)
-	yield(get_tree().create_timer(.5), "timeout")
+	yield (get_tree().create_timer(.5), "timeout")
 	phase = 1
 	velocity = Vector2(1200, 0)
-
 
 var p1_position_i = 0
 func process_phase_1():
@@ -140,15 +135,14 @@ func process_phase_1():
 	
 	if velocity.x > 0 and position.x > 2600:
 		position.y = phase_one_y_positions[p1_position_i]
-		velocity.x *= -1
+		velocity.x *= - 1
 		p1_position_i += 1
 		p1_position_i %= phase_one_y_positions.size()
-	elif velocity.x < 0 and position.x < -200:
+	elif velocity.x < 0 and position.x < - 200:
 		position.y = phase_one_y_positions[p1_position_i]
-		velocity.x *= -1
+		velocity.x *= - 1
 		p1_position_i += 1
 		p1_position_i %= phase_one_y_positions.size()
-
 
 func enter_phase_2():
 	if phase >= 2:
@@ -158,23 +152,22 @@ func enter_phase_2():
 	move_to = center
 	velocity = Vector2(0, 0)
 	# Wait to move to center
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield (get_tree().create_timer(1.5), "timeout")
 	$AnimatedSprite.play("Closing_eye")
-	yield($AnimatedSprite, "animation_finished")
+	yield ($AnimatedSprite, "animation_finished")
 
 	randomize()
 
 	spawn_minis(0.4, 0.8)
 
-	yield(get_tree().create_timer(10), "timeout")
+	yield (get_tree().create_timer(10), "timeout")
 	spawn_minis(1, 2)
 	phase_2_all_minis_spawned = true
 	# Automatically move to next phase after some time even if not all minis are killed
 	# TODO: This could break enter_phase_3 (double stuff) if unfortunately timed maybe
-	yield(get_tree().create_timer(90), "timeout")
+	yield (get_tree().create_timer(90), "timeout")
 	if phase == 2:
 		enter_phase_3()
-
 
 func spawn_minis(min_time: float, max_time: float):
 	mini_virus_positions.shuffle()
@@ -183,8 +176,7 @@ func spawn_minis(min_time: float, max_time: float):
 		owner.add_child(mini_virus)
 		mini_virus.position = position
 		mini_viruses.append(mini_virus)
-		yield(get_tree().create_timer(rng.randf_range(min_time, max_time)), "timeout")
-
+		yield (get_tree().create_timer(rng.randf_range(min_time, max_time)), "timeout")
 
 func process_phase_2():
 	var all_minis_dead = true
@@ -195,31 +187,28 @@ func process_phase_2():
 	if phase_2_all_minis_spawned and all_minis_dead:
 		enter_phase_3()
 
-
 func enter_phase_3():
 	if phase >= 3:
 		return
 	phase = 3
 	
 	$AnimatedSprite.play("Opening_eye")
-	yield($AnimatedSprite, "animation_finished")
+	yield ($AnimatedSprite, "animation_finished")
 	$AnimatedSprite.play("default")
 	
 	giardia_spawn_delay = 0.075
 	should_keep_spawning_giardia = true
 	spawn_giardia()
 	
-	yield(get_tree().create_timer(20), "timeout")
+	yield (get_tree().create_timer(20), "timeout")
 	should_keep_spawning_giardia = false
 	enter_phase_4()
-
 
 func process_phase_3(delta: float):
 	# Shake, but stay in the center
 	var shake_offset = phase_3_shaker.get_shake_offset(delta)
 	self.position += shake_offset
 	self.position = position.move_toward(center, delta * 200)
-
 
 func enter_phase_4():
 	if phase >= 4:
@@ -229,9 +218,9 @@ func enter_phase_4():
 	move_to = center
 	velocity = Vector2(0, 0)
 	# Wait to move to center
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield (get_tree().create_timer(1.5), "timeout")
 	$AnimatedSprite.play("Closing_eye")
-	yield($AnimatedSprite, "animation_finished")
+	yield ($AnimatedSprite, "animation_finished")
 	
 	# start spawning giardia again
 	giardia_spawn_delay = 0.6
@@ -242,7 +231,6 @@ func enter_phase_4():
 	spawn_minis(5, 10)
 	spawn_minis(5, 10)
 
-
 func process_phase_4(delta: float):
 	if p4_is_left_right_bouncing:
 		if p4_left_right_bouncing_index == p4_y_positions.size():
@@ -251,11 +239,11 @@ func process_phase_4(delta: float):
 
 		if velocity.x > 0 and position.x > 2600:
 			position.y = p4_y_positions[p4_left_right_bouncing_index]
-			velocity.x *= -1
+			velocity.x *= - 1
 			p4_left_right_bouncing_index += 1
-		elif velocity.x < 0 and position.x < -200:
+		elif velocity.x < 0 and position.x < - 200:
 			position.y = p4_y_positions[p4_left_right_bouncing_index]
-			velocity.x *= -1
+			velocity.x *= - 1
 			p4_left_right_bouncing_index += 1
 	else:
 		var p4_move_to = phase_4_positions[p4_pos_i]
@@ -269,7 +257,6 @@ func process_phase_4(delta: float):
 			if $Phase4VibrateTimer.is_stopped():
 				$Phase4VibrateTimer.start()
 
-
 func spawn_giardia():
 	var spawn_y = 200
 	# random between 400 and 1600
@@ -278,11 +265,10 @@ func spawn_giardia():
 	var giardia = Giardia.instance()
 	owner.add_child(giardia)
 	giardia.position = Vector2(spawn_x, spawn_y)
-	yield(get_tree().create_timer(giardia_spawn_delay), "timeout")
+	yield (get_tree().create_timer(giardia_spawn_delay), "timeout")
 	
 	if should_keep_spawning_giardia:
 		spawn_giardia()
-
 
 func _on_DamageArea_body_entered(body):
 	if health <= 0 or phase in [0, 2]:
@@ -290,7 +276,6 @@ func _on_DamageArea_body_entered(body):
 
 	if body.name == "Player":
 		body.get_hurt(damage, position.x, true)
-
 
 func _on_DamageArea_area_entered(area):
 	if area.name.validate_node_name().begins_with("Bullet"):
@@ -303,10 +288,8 @@ func _on_DamageArea_area_entered(area):
 			get_hurt(area.damage)
 			area.hit_enemy()
 
-
 func _on_HitEffectTimeout_timeout():
 	set_modulate(Color(1, 1, 1, 1))
-
 
 func get_hurt(incoming_damage: int):
 	$HurtSound.play()
@@ -321,15 +304,14 @@ func get_hurt(incoming_damage: int):
 	if health <= 0:
 		die()
 
-
 func die():
 	$DeathSound.play()
 	# TODO: Play cool death animation stuff
 	set_modulate(Color(1, 1, 1, 1))
 	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
+	$AnimatedSprite.scale = Vector2(9, 9)
+	yield ($AnimatedSprite, "animation_finished")
 	emit_signal("death")
-
 
 func _on_Phase4VibrateTimer_timeout():
 	p4_pos_i += 1
@@ -339,14 +321,3 @@ func _on_Phase4VibrateTimer_timeout():
 		p4_is_left_right_bouncing = true
 		p4_left_right_bouncing_index = 0
 		velocity = Vector2(1000, 0)
-
-
-
-
-
-
-
-
-
-
-

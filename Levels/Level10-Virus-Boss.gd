@@ -8,3 +8,7 @@ func _process(_delta):
 	if not door_closed and (player.position.x > 810 or player.position.y < 1020):
 		$BoneDoor.move_down()
 		door_closed = true
+
+
+func _on_Virus_death():
+	pass # TODO: Start self-destruct
