@@ -312,6 +312,7 @@ func die():
 	$AnimatedSprite.scale = Vector2(9, 9)
 	yield ($AnimatedSprite, "animation_finished")
 	emit_signal("death")
+	queue_free()
 
 func _on_Phase4VibrateTimer_timeout():
 	p4_pos_i += 1
