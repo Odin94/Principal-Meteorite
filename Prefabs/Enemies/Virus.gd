@@ -311,6 +311,10 @@ func die():
 	$AnimatedSprite.play("death")
 	$AnimatedSprite.scale = Vector2(9, 9)
 	yield ($AnimatedSprite, "animation_finished")
+	$DeathSound.play()
+	yield ($AnimatedSprite, "animation_finished")
+	$DeathSound.play()
+	yield ($AnimatedSprite, "animation_finished")
 	emit_signal("death")
 	queue_free()
 

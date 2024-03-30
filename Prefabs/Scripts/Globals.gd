@@ -1,10 +1,13 @@
 extends Node
 
+var Explosion := preload ("res://Prefabs/Environment/Explosion.tscn")
+
 const save_path = "user://savegame.save"
 
 var coming_from_door = ""
 
 var player_direction = 1
+onready var rng = RandomNumberGenerator.new()
 
 var collected_health_powerups: Array = []
 var collected_jump_powerups: Array = []
@@ -16,6 +19,8 @@ onready var self_destruct_shaker := Shaker.new(100.0, 10.0, 0)
 var player: KinematicBody2D
 var camera: Camera2D
 var is_self_destructing := false
+var explosion_interval := 0.25
+var explosion_interval_counter := 0.0
 
 func _physics_process(delta):
 	if !is_instance_valid(camera):
@@ -26,8 +31,17 @@ func _physics_process(delta):
 	if is_self_destructing and is_instance_valid(camera):
 		var shake_offset = self_destruct_shaker.get_shake_offset(delta)
 		camera.offset = shake_offset
+		explosion_interval_counter += delta
+		if explosion_interval_counter > explosion_interval:
+			explosion_interval = rng.randf_range(0.1, 0.5)
+			explosion_interval_counter = 0
+			var explosion = Explosion.instance()
+			add_child(explosion)
+			explosion.z_index = 2
+			explosion.position = Vector2(player.position.x - rng.randi_range( - 500, 500), player.position.y - rng.randi_range( - 500, 500))
 
 func _ready():
+	rng.randomize()
 	OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size() * 0.5 - OS.get_window_size() * 0.5)
 
 func save():
