@@ -19,12 +19,14 @@ var time = 0
 func _ready():
 	set_modulate(Color(0, 0, 0, 1))
 	$SpawnInTimer.wait_time = rng.randf_range(0.5, 2.5)
+	$SpawnSound.pitch_scale = rng.randf_range(0.8, 1.2)
 
 
 func _physics_process(delta):
 	if self.position.distance_to(player.global_position) < 250 and !triggered:
 		triggered = true
 		$SpawnInTimer.start()
+		$SpawnSound.play()
 	if !triggered:
 		return
 		

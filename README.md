@@ -52,3 +52,4 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
     * Jumping, boss-1-scream [mixkit.co](https://mixkit.co/free-sound-effects)
     * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
     * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)
+    * Mini-Virus spawn sound by [alko_Changing on Pixabay](https://pixabay.com/sound-effects/deep-strange-whoosh-183845/)

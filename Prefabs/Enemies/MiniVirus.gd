@@ -18,6 +18,7 @@ onready var player: KinematicBody2D = get_tree().get_nodes_in_group("Player")[0]
 func _ready():
 	set_modulate(Color(0, 0, 0, 1))
 	$SpawnInTimer.start()
+	$SpawnSound.play()
 
 
 func _physics_process(delta):

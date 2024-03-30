@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-3.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/warped-files/PNG/sprites/Fx/enemy-death/enemy-death-1.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Sprites/Viral_Creatures_Pack2/1000%Scaling/PNGs/Shielded/Shielded5.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Viral_Creatures_Pack2/1000%Scaling/PNGs/Shielded/Shielded3.png" type="Texture" id=13]
 [ext_resource path="res://Prefabs/Enemies/FloatyVirus.gd" type="Script" id=14]
+[ext_resource path="res://Audio/deep-strange-whoosh-183845.wav" type="AudioStream" id=15]
 [ext_resource path="res://Audio/enemy_hurt.wav" type="AudioStream" id=16]
 [ext_resource path="res://Audio/enemy_death.wav" type="AudioStream" id=17]
 
@@ -75,6 +76,11 @@ volume_db = -5.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 17 )
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2( 1, 1 )
+stream = ExtResource( 15 )
+volume_db = 2.0
 
 [node name="HitEffectTimeout" type="Timer" parent="."]
 wait_time = 0.1
