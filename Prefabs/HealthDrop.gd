@@ -11,7 +11,6 @@ onready var target_scale = max_scale
 
 var active = true
 
-
 func _physics_process(_delta):
     $Sprite.scale.x = lerp($Sprite.scale.x, target_scale, scaling_speed)
     $Sprite.scale.y = lerp($Sprite.scale.y, target_scale, scaling_speed)
@@ -19,7 +18,6 @@ func _physics_process(_delta):
         target_scale = min_scale
     elif $Sprite.scale.x <= (min_scale + 0.05):
         target_scale = max_scale
-
 
 func _on_HealthDrop_body_entered(body: Node2D):
     if not active:
@@ -30,5 +28,5 @@ func _on_HealthDrop_body_entered(body: Node2D):
         active = false
         $PickUpSound.play()
         $Sprite.visible = false
-        yield($PickUpSound, "finished")
+        yield ($PickUpSound, "finished")
         queue_free()
