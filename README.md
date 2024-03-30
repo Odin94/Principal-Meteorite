@@ -32,7 +32,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 * Add reward in lvl1 right jump place
 
 * Quick intro when starting a new game
-* 2nd boss fight
+* 2nd boss fight  (TODO: Add more health to phase 3)
 * Quick end screen
 * More levels
 * Run-back-to-start-on-self-destruct-timer ending event
