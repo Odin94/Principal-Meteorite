@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Prefabs/Enemies/Attacks/Giardia.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Environment/BoneDoor.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/Level10-Virus-Boss.gd" type="Script" id=8]
+[ext_resource path="res://Levels/VirusBossCamera.gd" type="Script" id=9]
 
 [node name="Level10-Virus-Boss" type="Node2D"]
 script = ExtResource( 8 )
@@ -19,6 +20,7 @@ position = Vector2( 599, 1425 )
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+script = ExtResource( 9 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
