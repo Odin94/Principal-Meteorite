@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (PackedScene) var Bullet
+export(PackedScene) var Bullet
 
 onready var shooting_cooldown = $ShootingCooldown
 
@@ -34,7 +34,7 @@ signal health_changed
 
 func _ready():
 	direction = Globals.player_direction
-	$AnimatedSprite.flip_h = direction == -1
+	$AnimatedSprite.flip_h = direction == - 1
 	
 	init_upgrades()
 	
@@ -64,8 +64,7 @@ func _physics_process(_delta):
 	# only setting .y here to make walking on slopes work
 	velocity.y = move_and_slide(velocity, Vector2.UP, true).y
 
-	velocity.x = lerp(velocity.x, 0, 0.25)  # lerp = linear interpolation  # weight can be constant because _physics_process delta is constant
-
+	velocity.x = lerp(velocity.x, 0, 0.25) # lerp = linear interpolation  # weight can be constant because _physics_process delta is constant
 
 func process_input():
 	if (dead):
@@ -96,7 +95,7 @@ func process_input():
 			velocity.y = 0
 		limit_floorless_jump_time()
 	
-	if is_on_floor() :
+	if is_on_floor():
 		if $BounceTimer.is_stopped():
 			touched_ground_recently = true
 			bouncing = false
@@ -113,7 +112,6 @@ func process_input():
 	if Input.is_action_pressed("shoot"):
 		shoot()
 
-
 func shoot():
 	if shooting_cooldown.is_stopped():
 		$ShotSound.play()
@@ -122,26 +120,23 @@ func shoot():
 		bullet.transform = global_transform
 		
 		var bullet_offset = $AnimatedSprite.frames.get_frame("_idle", 0).get_width() * 0.9
-		bullet.position.x += bullet_offset if direction == 1 else -bullet_offset
+		bullet.position.x += bullet_offset if direction == 1 else - bullet_offset
 		
 		bullet.set_damage(bullet_damage)
 		bullet.set_direction(Vector2(direction, 0))
 		bullet.limit_lifespan(bullet_lifespan)
 		bullet.modulate = bullet_color
 		
-		shooting_cooldown.start()  # Timer node has Wait Time & One Shot to run only once for a certain time
-
+		shooting_cooldown.start() # Timer node has Wait Time & One Shot to run only once for a certain time
 
 func limit_floorless_jump_time():
 	# Coyote jump
-	yield(get_tree().create_timer(.1), "timeout")
+	yield (get_tree().create_timer(.1), "timeout")
 	touched_ground_recently = false
 
-
 func remember_jump_press():
-	yield(get_tree().create_timer(.15), "timeout")
+	yield (get_tree().create_timer(.15), "timeout")
 	jump_was_pressed = false
-	
 	
 func jump():
 	velocity.y = jump_force
@@ -150,7 +145,6 @@ func jump():
 	touched_ground_recently = false
 	$JumpSound.play()
 
-
 func bounce(bounce_force: int):
 	$BounceTimer.start()
 	bouncing = true
@@ -158,8 +152,7 @@ func bounce(bounce_force: int):
 	air_jump_count = 0
 	touched_ground_recently = false
 
-
-func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: bool = true):
+func get_hurt(damage: int, source_x: float=position.x, trigger_hit_recovery: bool=true):
 	if (dead):
 		return
 
@@ -186,36 +179,31 @@ func get_hurt(damage: int, source_x: float = position.x, trigger_hit_recovery: b
 		else:
 			$MinHitRecoveryTimer.start(invincibility_time / 2)
 
-
 func die():
 	dead = true
+	set_modulate(Color(1, 0, 0))
 	$AnimatedSprite.play("death")
 	$DeathSound.play()
-	yield(get_tree().create_timer(5), "timeout")
+	yield (get_tree().create_timer(5), "timeout")
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Levels/TitleScreen.tscn")
-
 
 func get_health_upgrade():
 	max_health += 99
 	health = max_health
 	emit_signal("health_changed", health, max_health)
 	
-	
 func get_fire_beam_upgrade():
 	bullet_lifespan = .6
 	bullet_damage = 15
 	bullet_color = Color(1, .7, .7)
 
-
 func get_health_pickup(heal_amount: int):
 	health = min(health + heal_amount, max_health)
 	emit_signal("health_changed", health, max_health)
-	
 
 func save_stats():
 	Globals.player_health = health
-
 
 func init_upgrades():
 	for upgrade in Globals.collected_health_powerups:
@@ -229,5 +217,5 @@ func init_upgrades():
 	
 	health = Globals.player_health
 	
-	yield(get_tree().create_timer(.01), "timeout")  # need to delay signal because otherwise HUD may not be initialized yet
+	yield (get_tree().create_timer(.01), "timeout") # need to delay signal because otherwise HUD may not be initialized yet
 	emit_signal("health_changed", health, max_health)
