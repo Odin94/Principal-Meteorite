@@ -2,6 +2,8 @@ extends Node
 
 var Explosion := preload ("res://Prefabs/Environment/Explosion.tscn")
 var SelfDestructTimer := preload ("res://Prefabs/TextOverlays/SelfDestructTimer.tscn")
+var BackgroundMusicPlayer := preload ("res://Prefabs/BackgroundMusic.tscn")
+onready var background_music := BackgroundMusicPlayer.instance()
 
 const save_path = "user://savegame.save"
 
@@ -49,6 +51,7 @@ func _ready():
 	rng.randomize()
 	OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size() * 0.5 - OS.get_window_size() * 0.5)
 	add_child(self_destruct_timer)
+	add_child(background_music)
 
 func start_self_destruct_timer():
 	self_destruct_timer_text = SelfDestructTimer.instance()
@@ -101,5 +104,7 @@ func load():
 	#var current_scene = root.get_child(root.get_child_count() - 1)
 	#current_scene.free()
 	
+	background_music.play()
+
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene(level_to_load)

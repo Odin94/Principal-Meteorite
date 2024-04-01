@@ -48,6 +48,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 * Living tissue platforms, squid+crab+jumper enemy, bullet sprites: [Luis Zuno](https://www.patreon.com/ansimuz)
 * Virus boss & bullets: [Kuuly](https://kuuly.itch.io)
 * Font: Open Sans
+* Space image: [Alex Andrews](https://www.pexels.com/photo/photo-of-deep-sky-object-816608/)
 * Sounds:
     * Jumping, boss-1-scream [mixkit.co](https://mixkit.co/free-sound-effects)
     * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
