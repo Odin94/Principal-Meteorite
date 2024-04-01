@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Levels/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=2]
 [ext_resource path="res://Prefabs/Enemies/Crab.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Audio/mixkit-heartbeat-medium-speed-495.wav" type="AudioStream" id=5]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -62,6 +63,11 @@ margin_bottom = 90.0
 focus_neighbour_bottom = NodePath("../Start")
 text = "Exit"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

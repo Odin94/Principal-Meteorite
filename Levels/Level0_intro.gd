@@ -55,3 +55,7 @@ func _process(delta):
 func _input(ev: InputEvent):
 	if ev is InputEventKey and ev.scancode == KEY_ESCAPE and not ev.echo:
 		is_fading_out = true
+
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer.play()
