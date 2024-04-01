@@ -17,7 +17,7 @@ func _on_Player_health_changed(health: int, max_health: int):
 	
 	while (health > 99):
 		  health -= 99
-	$HP.text = String(health)
+	$HP.text = String(max(health, 0))
 
 func re_draw_health_boxes(health: int, max_health: int):
 	for i in range(1, 9):
