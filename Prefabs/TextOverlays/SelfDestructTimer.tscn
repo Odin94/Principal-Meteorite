@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Prefabs/TextOverlays/SelfDestructTimer.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 27
+font_data = ExtResource( 1 )
+
+[node name="SelfDestructTimer" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 908.0
+margin_top = 18.0
+margin_right = 985.0
+margin_bottom = 57.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "00:00"

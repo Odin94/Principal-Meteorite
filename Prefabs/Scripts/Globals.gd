@@ -1,6 +1,7 @@
 extends Node
 
 var Explosion := preload ("res://Prefabs/Environment/Explosion.tscn")
+var SelfDestructTimer := preload ("res://Prefabs/TextOverlays/SelfDestructTimer.tscn")
 
 const save_path = "user://savegame.save"
 
@@ -14,13 +15,15 @@ var collected_jump_powerups: Array = []
 var collected_beam_powerups: Array = []
 var player_health = 99
 
-# TODO: In Globals, show countdown timer 
 onready var self_destruct_shaker := Shaker.new(100.0, 10.0, 0)
 var player: KinematicBody2D
 var camera: Camera2D
 var is_self_destructing := false
+var reached_entrance_before_self_destruct := false
 var explosion_interval := 0.25
 var explosion_interval_counter := 0.0
+onready var self_destruct_timer := Timer.new()
+var self_destruct_timer_text
 
 func _physics_process(delta):
 	if !is_instance_valid(camera):
@@ -39,10 +42,26 @@ func _physics_process(delta):
 			add_child(explosion)
 			explosion.z_index = 2
 			explosion.position = Vector2(player.position.x - rng.randi_range( - 500, 500), player.position.y - rng.randi_range( - 500, 500))
+		if is_instance_valid(self_destruct_timer_text):
+			self_destruct_timer_text.update_time(self_destruct_timer.time_left)
 
 func _ready():
 	rng.randomize()
 	OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size() * 0.5 - OS.get_window_size() * 0.5)
+	add_child(self_destruct_timer)
+
+func start_self_destruct_timer():
+	self_destruct_timer_text = SelfDestructTimer.instance()
+	add_child(self_destruct_timer_text)
+	self_destruct_timer.wait_time = 100.0
+	self_destruct_timer.one_shot = true
+	var _i = self_destruct_timer.connect("timeout", self, "_on_timer_timeout")
+	self_destruct_timer.start()
+
+func _on_timer_timeout():
+	if not reached_entrance_before_self_destruct:
+		# TODO: Add super big explosion here
+		player.die()
 
 func save():
 	var save_game = File.new()
