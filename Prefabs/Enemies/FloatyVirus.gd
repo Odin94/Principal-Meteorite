@@ -17,9 +17,10 @@ var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_modulate(Color(0, 0, 0, 1))
-	$SpawnInTimer.wait_time = rng.randf_range(0.5, 2.5)
-	$SpawnSound.pitch_scale = rng.randf_range(0.8, 1.2)
+	if not Globals.is_self_destructing:
+		set_modulate(Color(0, 0, 0, 1))
+		$SpawnInTimer.wait_time = rng.randf_range(0.5, 2.5)
+		$SpawnSound.pitch_scale = rng.randf_range(0.8, 1.2)
 
 
 func _physics_process(delta):

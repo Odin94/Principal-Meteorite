@@ -78,7 +78,6 @@ volume_db = -5.0
 stream = ExtResource( 17 )
 
 [node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2( 1, 1 )
 stream = ExtResource( 15 )
 volume_db = 2.0
 

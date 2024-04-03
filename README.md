@@ -9,7 +9,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 
 
 ## Setup
-* Open with Godot game engine (tested with v3.4 on Windows)
+* Open with Godot game engine (tested with v3.5 on Windows)
 
 
 ## Development

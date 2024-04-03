@@ -59,8 +59,8 @@ next_level = "res://Levels/Level10-Virus-Boss.tscn"
 [node name="Door-Lvl8-pre-boss-9-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 162, 2205 )
 
-[node name="Door-Lvl9-pre-boss-8-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
-position = Vector2( 1020, 2193 )
+[node name="Door-Lvl10-virus-boss-9-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 5174, 2203 )
 
 [node name="FloatyVirus" parent="." instance=ExtResource( 6 )]
 position = Vector2( 3154, 2375 )
