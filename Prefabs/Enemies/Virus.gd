@@ -70,12 +70,15 @@ var mini_virus_positions := [
 # After boss dies, shake screen & start self-destruct timer
 
 func _ready():
-	randomize()
-	rng.randomize()
-	if direction == 1:
-		$AnimatedSprite.flip_h = true
-	$AnimatedSprite.play("Closed_eye")
-	float_up_down(0)
+	if Globals.is_self_destructing:
+		queue_free()
+	else:
+		randomize()
+		rng.randomize()
+		if direction == 1:
+			$AnimatedSprite.flip_h = true
+		$AnimatedSprite.play("Closed_eye")
+		float_up_down(0)
 
 func _physics_process(delta: float):
 	if health <= 0:
@@ -278,6 +281,8 @@ func _on_DamageArea_body_entered(body):
 		body.get_hurt(damage, position.x, true)
 
 func _on_DamageArea_area_entered(area):
+	if health <= 0:
+		return
 	if area.name.validate_node_name().begins_with("Bullet"):
 		if phase == 0:
 		   enter_phase_1()
@@ -310,7 +315,9 @@ func die():
 	set_modulate(Color(1, 1, 1, 1))
 	$AnimatedSprite.play("death")
 	$AnimatedSprite.scale = Vector2(9, 9)
-	yield ($AnimatedSprite, "animation_finished")
+	for mini in mini_viruses:
+		if is_instance_valid(mini):
+			mini.die()
 	$DeathSound.play()
 	yield ($AnimatedSprite, "animation_finished")
 	$DeathSound.play()
