@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tilemaps/Level1.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Prefabs/Scripts/VirusBossCamera.gd" type="Script" id=9]
 [ext_resource path="res://Prefabs/TextOverlays/Self Destruct.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/Environment/Door.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Prefabs/Environment/DamagingArea.tscn" type="PackedScene" id=12]
 
 [node name="Level10-Virus-Boss" type="Node2D"]
 script = ExtResource( 8 )
@@ -78,6 +79,26 @@ next_level = "res://Levels/Level9.tscn"
 
 [node name="Door-Lvl9-10-virus-boss-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 71, 1466 )
+
+[node name="DamagingArea" parent="." instance=ExtResource( 12 )]
+position = Vector2( 800, 1628 )
+scale = Vector2( 20, 1 )
+
+[node name="DamagingArea2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1760, 1628 )
+scale = Vector2( 20, 1 )
+
+[node name="DamagingArea3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1822, 684 )
+scale = Vector2( 160, 1 )
+
+[node name="DamagingArea4" parent="." instance=ExtResource( 12 )]
+position = Vector2( 576, 1333 )
+scale = Vector2( 4, 75 )
+
+[node name="DamagingArea5" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1824, 1457 )
+scale = Vector2( 4, 90 )
 
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
 [connection signal="death" from="Virus" to="." method="_on_Virus_death"]
