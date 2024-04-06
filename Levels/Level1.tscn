@@ -25,6 +25,9 @@ drag_margin_v_enabled = true
 [node name="JumpUpgrade_1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -160, 312 )
 
+[node name="JumpUpgrade_1_2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1439, -738 )
+
 [node name="HealthUpgrade_2" parent="." instance=ExtResource( 10 )]
 position = Vector2( -456, -200 )
 z_index = -4

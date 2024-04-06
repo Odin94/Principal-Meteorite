@@ -31,7 +31,6 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 
 * Add reward after beating first boss (aside from +3 jumps)
 * Make boss growl louder
-* Add reward in lvl1 right jump place
 
 * Quick intro when starting a new game
 * 2nd boss fight  (TODO: Add more health to phase 3)
