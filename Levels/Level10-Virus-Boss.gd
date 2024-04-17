@@ -4,6 +4,9 @@ onready var player: KinematicBody2D = get_tree().get_nodes_in_group("Player").fr
 onready var camera: Camera2D = player.get_node("Camera2D")
 var door_closed = false
 
+func _ready():
+	Globals.background_music.stop()
+
 func _process(_delta):
 	if not door_closed and (player.position.x > 810 or player.position.y < 1020):
 		$BoneDoor.move_down()

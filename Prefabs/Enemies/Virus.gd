@@ -323,6 +323,8 @@ func die():
 	$DeathSound.play()
 	yield ($AnimatedSprite, "animation_finished")
 	emit_signal("death")
+	yield (get_tree().create_timer(1), "timeout")
+	Globals.background_music.play()
 	queue_free()
 
 func _on_Phase4VibrateTimer_timeout():
