@@ -33,6 +33,9 @@ next_level = "res://Levels/Level6.tscn"
 [node name="Door-Lvl1-5-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
 position = Vector2( 128, 468 )
 
+[node name="Door-Lvl6-5-spawn_point" type="Position2D" parent="." groups=["spawn_point"]]
+position = Vector2( 1729, 129 )
+
 [node name="Jumper" parent="." instance=ExtResource( 6 )]
 position = Vector2( 952, -88 )
 
