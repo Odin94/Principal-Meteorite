@@ -28,7 +28,6 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 
 ## Planned features
 * Quick end animation / screen
-* Disable save points while self-destructing
 
 * Add reward after beating first boss (aside from +3 jumps)
 * Make boss growl louder
