@@ -48,7 +48,7 @@ func _physics_process(delta):
 	if color_rect_opacity >= 1:
 		var _x = get_tree().change_scene("res://Levels/Level1.tscn")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_joy_button_pressed(0, JOY_START):
 		is_fading_out = true
 

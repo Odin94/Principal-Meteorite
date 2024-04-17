@@ -5,7 +5,7 @@ onready var camera: Camera2D = player.get_node("Camera2D")
 var door_closed = false
 
 func _ready():
-	Globals.background_music.stop()
+	Globals.background_music.get_node("MainTheme").stop()
 
 func _process(_delta):
 	if not door_closed and (player.position.x > 810 or player.position.y < 1020):
@@ -23,6 +23,8 @@ func _on_Virus_death():
 
 	# Set self-destruct-enabled var in Globals
 	Globals.is_self_destructing = true
+	Globals.background_music.get_node("MainTheme").play()
+	Globals.background_music.get_node("Rumbling").play()
 
 	yield (get_tree().create_timer(3), "timeout")
 	$PauseTimer.start()

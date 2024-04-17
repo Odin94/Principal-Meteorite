@@ -29,7 +29,9 @@ var self_destruct_timer_text
 
 func _physics_process(delta):
 	if !is_instance_valid(camera):
-		player = get_tree().get_nodes_in_group("Player").front()
+		var player_nodes := get_tree().get_nodes_in_group("Player")
+		if not player_nodes.empty():
+			player = player_nodes.front()
 		if is_instance_valid(player):
 			camera = player.get_node("Camera2D")
 	
@@ -104,7 +106,7 @@ func load():
 	#var current_scene = root.get_child(root.get_child_count() - 1)
 	#current_scene.free()
 	
-	background_music.play()
+	background_music.get_node("MainTheme").play()
 
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene(level_to_load)

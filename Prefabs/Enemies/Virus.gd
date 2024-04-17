@@ -175,6 +175,8 @@ func enter_phase_2():
 func spawn_minis(min_time: float, max_time: float):
 	mini_virus_positions.shuffle()
 	for position in mini_virus_positions:
+		if health <= 0:
+			return
 		var mini_virus = MiniVirus.instance()
 		owner.add_child(mini_virus)
 		mini_virus.position = position
@@ -261,6 +263,8 @@ func process_phase_4(delta: float):
 				$Phase4VibrateTimer.start()
 
 func spawn_giardia():
+	if health <= 0:
+		return
 	var spawn_y = 200
 	# random between 400 and 1600
 	var spawn_x = randi() % 1201 + 400
@@ -324,7 +328,7 @@ func die():
 	yield ($AnimatedSprite, "animation_finished")
 	emit_signal("death")
 	yield (get_tree().create_timer(1), "timeout")
-	Globals.background_music.play()
+	Globals.background_music.get_node("MainTheme").play()
 	queue_free()
 
 func _on_Phase4VibrateTimer_timeout():

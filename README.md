@@ -28,6 +28,7 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
 
 ## Planned features
 * Quick end animation / screen
+* Disable save points while self-destructing
 
 * Add reward after beating first boss (aside from +3 jumps)
 * Make boss growl louder
@@ -52,3 +53,4 @@ You are Sam Erin, famous bounty hunter and explorer, sent to into the maw of the
     * Shooting, hurt-sounds, death-sounds, health-pickup made with [sfxr](https://sfxr.me)
     * Death scream by [AmeAngelOfSin](https://freesound.org/people/AmeAngelofSin/sounds/168814/)
     * Mini-Virus spawn sound by [alko_Changing on Pixabay](https://pixabay.com/sound-effects/deep-strange-whoosh-183845/)
+    * Rumbling sound by [Pixabay](https://pixabay.com/sound-effects/earth-rumble-6953/)
